@@ -1,0 +1,11 @@
+.main{
+  position: relative;
+  top: 70px;
+  overflow: hidden;
+  &__top{
+    background: url('https://iev.aero/images/main.jpg') no-repeat bottom;
+  }
+  p{
+    margin: 0;
+  }
+}
