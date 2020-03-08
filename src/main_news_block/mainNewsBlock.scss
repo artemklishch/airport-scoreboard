@@ -1,0 +1,13 @@
+@import '../common.scss';
+
+.mainNewsBlock{
+  a{
+    text-decoration: none;
+    color: $darkGreyColor;
+  }
+  hr{
+    height: 10px;
+    background-color: $blueColor;
+    border: none;
+  }
+}

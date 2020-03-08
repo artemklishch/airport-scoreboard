@@ -11,6 +11,7 @@
   height: 70px;
   z-index: 9999;
   &__logo{
+    transition: 1s;
     margin-left: 20px;
     @media(min-width:600px){
       margin-left: 0;
@@ -30,6 +31,7 @@
   }
   &__nav{
     display: none;
+    font-size: 20px;
     &__navigation{
       list-style: none;
       display: flex;

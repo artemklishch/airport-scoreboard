@@ -1,10 +1,15 @@
-@import 'header/header.scss';
-@import 'main.scss';
-@import 'mainTop.scss';
+@import './header/header.scss';
+@import './main.scss';
+@import './main_top_block/mainTopBlock.scss';
+@import '/main_middle_block/mainMiddleBlock.scss';
+@import './main_middle_block//mainMiddleFourBlock.scss';
+@import './main_middle_block//mainMiddlePriorityLine.scss';
+@import './main_news_block/mainNewsBlock.scss';
 
 *{
   box-sizing: border-box;
 }
 .wrapper{
   height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
 }

@@ -1,0 +1,86 @@
+@import '../common.scss';
+
+.top__link_left {
+  background: url("../images/abstract.png");
+  border-top-right-radius: 9em;
+  &:hover{
+    border-top-right-radius: 5em;
+  }
+}
+
+.top__link_right{
+  background: url("../images/halftone.png");
+  border-top-left-radius: 9em;
+  text-align: right;
+  &:hover{
+    border-top-left-radius: 5em;
+  }
+}
+
+.bottom__link_left {
+  background: url("../images/abstract.png");
+  border-bottom-right-radius: 9em;
+  &:hover{
+    border-bottom-right-radius: 5em;
+  }
+}
+
+.bottom__link_right{
+  background: url("../images/halftone.png");
+  border-bottom-left-radius: 9em;
+  text-align: right;
+  &:hover{
+    border-bottom-left-radius: 5em;
+  }
+}
+
+.link_text {
+  background-color: $whiteColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  p {
+    padding: 15px 20px;
+  }
+  span {
+    display: block;
+    text-transform: uppercase;
+    color: $blueColor;
+    font-weight: 700;
+    padding: 20px;
+    width: 70%;
+    transition: 0.5s;
+  }
+  &_left_message {
+    border-top-right-radius: 3em;
+    align-self: flex-start;
+  }
+  &_right_message {
+    border-top-left-radius: 3em;
+    align-self: flex-end;
+  }
+}
+
+
+@media(min-width: 770px){
+  .top__info_top-row{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    a:first-child{
+      margin-right: 20px;
+    }
+  }
+  .top__info_top-row:last-child{
+    grid-template-columns: 1.5fr 1fr;
+    a{
+      margin-top: 0;
+    }
+  }
+  .top__info_bottom-row{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    a:first-child{
+      margin-right: 20px;
+    }
+  }
+}
