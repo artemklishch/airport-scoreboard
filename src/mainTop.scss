@@ -1,0 +1,64 @@
+@import 'common.scss';
+
+.main__top{
+  padding: 40px 0;
+  &_header{
+    margin: 0 20px;
+    text-transform: uppercase;
+    color: $whiteColor;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+  }
+  &_form{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background-color: $whiteColor;
+    margin-top: 20px;
+    font-size: 30px;
+  }
+  &_form-glass{
+    font-size: 30px;
+    color: grey;
+    padding-left: 10px;
+    background-color: $whiteColor;
+    height: 100%;
+    padding-top: 20px;
+  }
+  &_form-input{
+    background-color: $whiteColor;
+    width: 90vw;
+    outline: none;
+    border: none;
+    height: 100%;
+  }
+  &_form-submit{
+    display: none;
+    color: $whiteColor;
+    text-transform: uppercase;
+    background-color: $blueColor;
+    border: none;
+    height: 100%;
+    border-top-right-radius: 4em;
+    width: 250px;
+    font-size: 20px;
+    transition: 0.5s;
+    font-weight: 700;
+  }
+  &_form-submit:hover{
+    border-top-right-radius: 2em;
+  }
+  @media(min-width:700px){
+    &_form{
+      width: 650px;
+      margin: 20px auto;
+      background-color: transparent;
+    }
+    &_header{
+      text-align: center;
+    }
+    &_form-submit{
+      display: block;
+    }
+  }
+}
