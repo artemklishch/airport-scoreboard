@@ -13,8 +13,8 @@ const App = () => {
         <MainTopBlock />
         <MainMiddleBlock />
         <MainNewsBlock />
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 };
