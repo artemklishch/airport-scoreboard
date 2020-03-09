@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MainTop = () => {
+const MainTopBlock = () => {
   return (
     <section className="main__top">
       <h1 className="main__top_header">Flight search</h1>
@@ -22,4 +22,4 @@ const MainTop = () => {
     </section>
   );
 };
-export default MainTop;
+export default MainTopBlock;

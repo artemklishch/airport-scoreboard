@@ -1,7 +1,7 @@
-@import '../common.scss';
+@import '../../common.scss';
 
 .top__link_left {
-  background: url("../images/abstract.png");
+  background: url("../../images/abstract.png");
   border-top-right-radius: 9em;
   &:hover{
     border-top-right-radius: 5em;
@@ -9,7 +9,7 @@
 }
 
 .top__link_right{
-  background: url("../images/halftone.png");
+  background: url("../../images/halftone.png");
   border-top-left-radius: 9em;
   text-align: right;
   &:hover{
@@ -18,7 +18,7 @@
 }
 
 .bottom__link_left {
-  background: url("../images/abstract.png");
+  background: url("../../images/abstract.png");
   border-bottom-right-radius: 9em;
   &:hover{
     border-bottom-right-radius: 5em;
@@ -26,7 +26,7 @@
 }
 
 .bottom__link_right{
-  background: url("../images/halftone.png");
+  background: url("../../images/halftone.png");
   border-bottom-left-radius: 9em;
   text-align: right;
   &:hover{

@@ -1,0 +1,27 @@
+@import '../common.scss';
+
+.footer__block{
+  background-color: #595959;
+  color: $whiteColor;
+  padding: 0 10px 20px 10px;
+  a{
+    text-decoration: none;
+    color: $whiteColor;
+  }
+}
+
+
+.footer__block__info-links{
+  &__links-block{
+    border-bottom: 1px solid #b8bdc1;
+    &_title{
+      font-size: 16px;
+      margin: 20px 0;
+    }
+    &_list{
+      display: none;
+      list-style: none;
+      padding: 0;
+    }
+  }
+}

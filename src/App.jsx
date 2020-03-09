@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from './header/Header';
-import MainTopBlock from './main_top_block/MainTopBlock';
-import MainMiddleBlock from './main_middle_block/MainMiddleBlock';
-import MainNewsBlock from './main_news_block/MainNewsBlock';
+import MainTopBlock from './main/main_top_block/MainTopBlock';
+import MainMiddleBlock from './main/main_middle_block/MainMiddleBlock';
+import MainNewsBlock from './main/main_news_block/MainNewsBlock';
+import Footer from './footer/Footer';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <MainTopBlock />
         <MainMiddleBlock />
         <MainNewsBlock />
+        <Footer />
       </main>
     </div>
   );
