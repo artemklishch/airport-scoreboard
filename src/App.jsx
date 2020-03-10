@@ -11,10 +11,10 @@ const App = () => {
     <div className="wrapper">
       <Header />
       <main className='main'>
-        {/* <MainTopBlock />
+        <MainTopBlock />
         <MainMiddleBlock />
-        <MainNewsBlock /> */}
-        <ScheduleList />
+        <MainNewsBlock />
+        {/* <ScheduleList /> */}
       </main>
       <Footer />
     </div>
