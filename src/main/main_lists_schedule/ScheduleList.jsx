@@ -39,6 +39,10 @@ const ScheduleList = () => {
               <td className="scheduleList__table__tbody_airline">Belavia</td>
               <td className="scheduleList__table__tbody_flight">B2848</td>
 
+              <td className="scheduleList__table__tbody_terminal-planned-time_onsmallwidth">
+                <p>A</p>
+                <p>4:45</p>
+              </td>
               <td className="scheduleList__table__tbody_onsmall-width">
                 <p>Minsk</p>
                 <p>Departed at 4:42</p>
@@ -53,6 +57,10 @@ const ScheduleList = () => {
               <td className="scheduleList__table__tbody_airline">Anralia</td>
               <td className="scheduleList__table__tbody_flight">B5648</td>
 
+              <td className="scheduleList__table__tbody_terminal-planned-time_onsmallwidth">
+                <p>B</p>
+                <p>5:50</p>
+              </td>
               <td className="scheduleList__table__tbody_onsmall-width">
                 <p>Viena</p>
                 <p>Departed at 6:42</p>

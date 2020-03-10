@@ -14,10 +14,9 @@
   color: $blackColor;
   text-transform: uppercase;
   text-align: center;
-  margin: 0;
 }
 
-td{
+td, th{
   padding: 20px 10px;
 }
 
@@ -32,10 +31,41 @@ td{
   &_row:nth-child(odd){
     background-color: rgba(0,102,135,.1);
   }
-  &_terminal, &_destintion, &_fact-time, &_airline, &_flight {
+  &_planned-time, &_terminal, &_destintion, &_fact-time, &_airline, &_flight {
     display: none;
+  }
+  &_onsmall-width p, &_terminal-planned-time_onsmallwidth p{
+    margin: 20px;
+  }
+  &_terminal-planned-time_onsmallwidth{
+    width: 20%;
   }
 }
 
 
-
+@media(min-width: 770px){
+  .scheduleList__table_thead{
+    display: block;
+  }
+  .scheduleList__table__tbody{
+    &_planned-time, &_terminal, &_destintion, &_fact-time, &_airline, &_flight {
+      display: inline-block;
+    }
+    &_onsmall-width, &_terminal-planned-time_onsmallwidth{
+      display: none;
+    }
+  }
+}
+@media(min-width: 1000px){
+  .scheduleList__data{
+    width: 70%;
+    margin: auto;
+    border-radius: 30px 30px 0 0;
+  }
+  .scheduleList__table{
+    td{
+      // display: inline-block;
+      // padding: 20px 10px;
+    }
+  }
+}
