@@ -6,10 +6,12 @@ const appStore = combineReducers({
   contentForFourBlocks: contentReducer
 });
 
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default createStore(
   appStore,
-
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
 );
 
