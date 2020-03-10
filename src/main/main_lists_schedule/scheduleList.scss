@@ -1,37 +1,129 @@
-@import '../../common.scss';
+@import "../../common.scss";
 
-.scheduleList{
+.scheduleList {
   padding: 40px 0;
-  &__data{
+  &__data {
     background-color: #fff;
   }
-  &__links{
-    text-align: center;
+  &__links {
+    position: relative;
+    margin-bottom: 60px;
+    i{
+      margin-right: 30px;
+    }
+    &_departures{
+      position: absolute;
+      left: 0;
+      border-top-right-radius: 2em; 
+    }
+    &_arrivals{
+      position: absolute;
+      right: 0;
+      border-top-left-radius: 2em;
+    }
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: $whiteColor;
+      background-color: $blueColor;
+      width: 60%;
+      z-index: 0;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      &:focus {
+        color: $blueColor;
+        background-color: $whiteColor;
+        z-index: 1;
+      }
+    }
   }
 }
 
-.main__top_header__scheduleList{
+.main__top_header__scheduleList {
   color: $blackColor;
   text-transform: uppercase;
   text-align: center;
-  margin: 0;
 }
 
+td,
+th {
+  padding: 20px 10px;
+}
 
-
-
-
-table {
+.scheduleList__table {
+  width: 100%;
   border-collapse: collapse;
-  margin:  0 auto;
+  &_thead {
+    display: none;
+    text-align: left;
+  }
+  &_caption {
+    text-transform: uppercase;
+    color: $blueColor;
+    font-weight: 700;
+    margin: 20px 0;
+  }
+}
+.scheduleList__table__tbody {
+  &_row:nth-child(odd) {
+    background-color: rgba(0, 102, 135, 0.1);
+  }
+  &_planned-time,
+  &_terminal,
+  &_destintion,
+  &_fact-time,
+  &_airline,
+  &_flight {
+    display: none;
+  }
+  &_onsmall-width p,
+  &_terminal-planned-time_onsmallwidth p {
+    margin: 20px;
+  }
+  &_terminal-planned-time_onsmallwidth {
+    width: 20%;
+  }
 }
 
-table, th, tr, td {
-  border: 1px solid black;
+@media (min-width: 770px) {
+  .scheduleList__table tr {
+    width: 100%;
+  }
+  .scheduleList__table_thead {
+    display: block;
+    tr {
+      display: inline-block;
+      width: 100%;
+    }
+    th {
+      display: inline-block;
+      width: calc(100% / 6);
+    }
+  }
+  .scheduleList__table__tbody {
+    &_planned-time,
+    &_terminal,
+    &_destintion,
+    &_fact-time,
+    &_airline,
+    &_flight {
+      display: inline-block;
+    }
+    &_onsmall-width,
+    &_terminal-planned-time_onsmallwidth {
+      display: none;
+    }
+    &_row td {
+      width: calc(100% / 6);
+    }
+  }
 }
-// .scheduleList__table{
-//   border: 2px solid #000;
-//   &_tr{
-//     border: 2px solid #000;
-//   }
-// }
+@media (min-width: 1000px) {
+  .scheduleList__data {
+    width: 80%;
+    margin: auto;
+    border-radius: 30px 30px 0 0;
+    overflow: hidden;
+  }
+}
