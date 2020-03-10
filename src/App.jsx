@@ -1,23 +1,19 @@
 import React from 'react';
 import Header from './header/Header';
-import MainTopBlock from './main/main_top_block/MainTopBlock';
-import MainMiddleBlock from './main/main_middle_block/MainMiddleBlock';
-import MainNewsBlock from './main/main_news_block/MainNewsBlock';
+import Main from './main/Main';
 import Footer from './footer/Footer';
-import ScheduleList from './main/main_lists_schedule/ScheduleList';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const App = () => {
   return (
-    <div className="wrapper">
-      <Header />
-      <main className='main'>
-        <MainTopBlock />
-        <MainMiddleBlock />
-        <MainNewsBlock />
-        {/* <ScheduleList /> */}
-      </main>
-      <Footer />
-    </div>
+    <Provider store={store}>
+      <div className="wrapper">
+        <Header />
+        <Main />
+        <Footer />
+      </div>
+    </Provider>
   );
 };
 export default App; 
