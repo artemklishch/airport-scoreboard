@@ -24,15 +24,40 @@ const ScheduleList = () => {
         </div>
 
         <table className="scheduleList__table">
-          <caption>Today</caption>
-          <thead>
+          <caption className="scheduleList__table_caption">Today</caption>
+          <thead className="scheduleList__table_thead">
             <tr>
               <th>Terminal</th><th>Locale time</th><th>Destination</th><th>Status</th><th>Airline</th><th>Flight</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>A</td><td>4:45</td><td>Minsk</td><td>Departed at 4:42</td><td>Belavia</td><td>B2848</td>
+          <tbody className="scheduleList__table__tbody">
+            <tr className="scheduleList__table__tbody_row">
+              <td className="scheduleList__table__tbody_terminal">A</td>
+              <td className="scheduleList__table__tbody_planned-time">4:45</td>
+              <td className="scheduleList__table__tbody_destintion">Minsk</td>
+              <td className="scheduleList__table__tbody_fact-time">Departed at 4:42</td>
+              <td className="scheduleList__table__tbody_airline">Belavia</td>
+              <td className="scheduleList__table__tbody_flight">B2848</td>
+
+              <td className="scheduleList__table__tbody_onsmall-width">
+                <p>Minsk</p>
+                <p>Departed at 4:42</p>
+                <p>Belavia</p>
+              </td>
+            </tr>
+            <tr className="scheduleList__table__tbody_row">
+              <td className="scheduleList__table__tbody_terminal">B</td>
+              <td className="scheduleList__table__tbody_planned-time">5:50</td>
+              <td className="scheduleList__table__tbody_destintion">Viena</td>
+              <td className="scheduleList__table__tbody_fact-time">Departed at 6:42</td>
+              <td className="scheduleList__table__tbody_airline">Anralia</td>
+              <td className="scheduleList__table__tbody_flight">B5648</td>
+
+              <td className="scheduleList__table__tbody_onsmall-width">
+                <p>Viena</p>
+                <p>Departed at 6:42</p>
+                <p>Anralia</p>
+              </td>
             </tr>
           </tbody>
         </table>

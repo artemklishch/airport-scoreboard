@@ -17,21 +17,25 @@
   margin: 0;
 }
 
+td{
+  padding: 20px 10px;
+}
 
-
-
-
-table {
+.scheduleList__table{
+  width: 100%;
   border-collapse: collapse;
-  margin:  0 auto;
+  &_thead{
+    display: none;
+  }
+}
+.scheduleList__table__tbody{
+  &_row:nth-child(odd){
+    background-color: rgba(0,102,135,.1);
+  }
+  &_terminal, &_destintion, &_fact-time, &_airline, &_flight {
+    display: none;
+  }
 }
 
-table, th, tr, td {
-  border: 1px solid black;
-}
-// .scheduleList__table{
-//   border: 2px solid #000;
-//   &_tr{
-//     border: 2px solid #000;
-//   }
-// }
+
+
