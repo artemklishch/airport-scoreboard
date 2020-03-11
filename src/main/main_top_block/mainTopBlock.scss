@@ -54,7 +54,7 @@
     padding: 0 10px;
     display: flex;
     flex-direction: column;
-    button{
+    &_depatures, &_arrivals{
       margin-top: 10px;
       height: 70px;
       color: $blueColor;

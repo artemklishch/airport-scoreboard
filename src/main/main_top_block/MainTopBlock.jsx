@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MainTopBlock = () => {
   return (
@@ -10,14 +11,14 @@ const MainTopBlock = () => {
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
       <div className="main__top__btns">
-        <button className="main__top__btns_depatures">
+        <Link to='/schedule' className="main__top__btns_depatures">
           <i className="fas fa-plane-departure"></i>
           All depatures
-          </button>
-        <button className="main__top__btns_arrivals">
+          </Link>
+        <Link to='/schedule' className="main__top__btns_arrivals">
           <i className="fas fa-plane-arrival"></i>
           All arrivals
-          </button>
+          </Link>
       </div>
     </section>
   );
