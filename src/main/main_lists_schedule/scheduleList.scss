@@ -9,15 +9,15 @@
   &__links {
     position: relative;
     margin-bottom: 60px;
-    i{
+    i {
       margin-right: 30px;
     }
-    &_departures{
+    &_departures {
       position: absolute;
       left: 0;
-      border-top-right-radius: 2em; 
+      border-top-right-radius: 2em;
     }
-    &_arrivals{
+    &_arrivals {
       position: absolute;
       right: 0;
       border-top-left-radius: 2em;
@@ -39,6 +39,11 @@
       }
     }
   }
+}
+.btn_on_focus {
+  color: $blueColor;
+  background-color: $whiteColor;
+  z-index: 1;
 }
 
 .main__top_header__scheduleList {

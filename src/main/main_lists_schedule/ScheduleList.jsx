@@ -11,9 +11,9 @@ import classNames from 'classnames';
 const ScheduleList = (props) => {
   const { flights } = props;
   const { flightType } = useParams();
-  const depBtnClass = classNames({
-    
-  });
+  
+  const depBtnClass = classNames('scheduleList__links_departures',{'btn_on_focus': true});
+
   // const [ flightState, onChangeFlightState ] = useState(null);
   // useEffect(() => {
   //   onChangeFlightState(flights);
@@ -32,7 +32,7 @@ const ScheduleList = (props) => {
 
       <div className="scheduleList__data">
         <div className="scheduleList__links">
-          <Link onClick={props.onGetDataForDepatures} to='/schedule/depatures' className="scheduleList__links_departures">
+          <Link onClick={props.onGetDataForDepatures} to='/schedule/depatures' className={depBtnClass}>
             <i className="fas fa-plane-departure"></i>
             Departures
         </Link>
