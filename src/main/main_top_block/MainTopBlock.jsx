@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onGetDeparturedFlights } from '../main.actions';
 
-const MainTopBlock = () => {
+const MainTopBlock = (props) => {
   return (
     <section className="main__top">
       <h1 className="main__top_header">Flight search</h1>
@@ -13,7 +13,7 @@ const MainTopBlock = () => {
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
       <div className="main__top__btns">
-        <Link to='/schedule' className="main__top__btns_depatures">
+        <Link onClick={console.log(props)} to='/schedule' className="main__top__btns_depatures">
           <i className="fas fa-plane-departure"></i>
           All depatures
           </Link>
@@ -26,10 +26,10 @@ const MainTopBlock = () => {
   );
 };
 
-// const mapState = state => {
-//   return {
-//     depaturedFlights: 
-//   }
-// };
+const mapState = state => {
+  return {
+    depaturedFlights: state.flightsData.flights,
+  }
+};
 
-export default connect()(MainTopBlock);
+export default connect(mapState)(MainTopBlock);

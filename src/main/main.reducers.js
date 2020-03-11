@@ -1,5 +1,4 @@
 import { DEPARTURED, ARRIVED } from './main.actions';
-import { onGetDataAboutFlights } from './main.gateway';
 
 const initialContentState = {
   firstFourBlocks: {
@@ -46,21 +45,22 @@ const initialContentState = {
       message: 'Terminal B',
     },
   },
-  flights: [],
 };
 export const contentReducer = (state = initialContentState, action) => {
   switch(action.type){
-    case DEPARTURED: {
-      const depaturedFlights = [];
-      onGetDataAboutFlights()
-        .then(flightsData => {
-          depaturedFlights = flightsData.departure;
-        })
-      return {
-        ...state,
-        flights: 
-      };
-    }
     default: return state;
   };
+};
+
+
+
+
+const initialFlightState = {
+  flights: [],
+};
+
+export const contentFlightsReducer = (state = initialFlightState, action) => {
+  switch(action.type){
+    default: return state;
+  }
 };
