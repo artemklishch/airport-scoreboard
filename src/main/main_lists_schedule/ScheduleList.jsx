@@ -4,10 +4,12 @@ import { onSelectProps } from '../main.selectors';
 import moment from 'moment';
 import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 const ScheduleList = (props) => {
   const { flights } = props;
+  console.log(props);
   // const [ flightState, onChangeFlightState ] = useState(null);
   // useEffect(() => {
   //   onChangeFlightState(flights);
