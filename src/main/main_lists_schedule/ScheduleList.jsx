@@ -14,13 +14,6 @@ const ScheduleList = (props) => {
   
   const depBtnClass = classNames('scheduleList__links_departures',{'btn_on_focus': true});
 
-  // const [ flightState, onChangeFlightState ] = useState(null);
-  // useEffect(() => {
-  //   onChangeFlightState(flights);
-  //   console.log(onChangeFlightState(flights));
-
-  //   return onChangeFlightState(null);
-  // }, flightState);
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
