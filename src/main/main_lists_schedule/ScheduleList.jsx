@@ -5,11 +5,15 @@ import moment from 'moment';
 import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 
 const ScheduleList = (props) => {
   const { flights } = props;
   const { flightType } = useParams();
+  const depBtnClass = classNames({
+    
+  });
   // const [ flightState, onChangeFlightState ] = useState(null);
   // useEffect(() => {
   //   onChangeFlightState(flights);
