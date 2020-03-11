@@ -4,6 +4,7 @@ import Main from './main/Main';
 import Footer from './footer/Footer';
 import { Provider } from 'react-redux';
 import store from './store';
+import { browserRouter } from 'react-router-dom';
 
 const App = () => {
   return (
