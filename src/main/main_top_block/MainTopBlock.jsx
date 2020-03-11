@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { onGetDeparturedFlights } from '../main.actions';
 
 const MainTopBlock = () => {
   return (
@@ -23,4 +25,11 @@ const MainTopBlock = () => {
     </section>
   );
 };
-export default MainTopBlock;
+
+// const mapState = state => {
+//   return {
+//     depaturedFlights: 
+//   }
+// };
+
+export default connect()(MainTopBlock);
