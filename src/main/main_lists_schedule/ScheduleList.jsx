@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { onSelectProps } from '../main.selectors';
 import moment from 'moment';
 import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 
 const ScheduleList = (props) => {
   const { flights } = props;
-  console.log(props);
+  // const [ flightState, onChangeFlightState ] = useState(null);
+  // useEffect(() => {
+  //   onChangeFlightState(flights);
+  //   console.log(onChangeFlightState(flights));
+
+  //   return onChangeFlightState(null);
+  // }, flightState);
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
