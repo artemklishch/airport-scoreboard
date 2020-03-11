@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 const ScheduleList = (props) => {
   const { flights } = props;
-  console.log(props);
+  const { flightType } = useParams();
   // const [ flightState, onChangeFlightState ] = useState(null);
   // useEffect(() => {
   //   onChangeFlightState(flights);
