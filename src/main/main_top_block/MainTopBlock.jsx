@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
 
-const MainTopBlock = () => {
+const MainTopBlock = (props) => {
   return (
     <section className="main__top">
       <h1 className="main__top_header">Flight search</h1>
@@ -10,16 +13,22 @@ const MainTopBlock = () => {
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
       <div className="main__top__btns">
-        <button className="main__top__btns_depatures">
+        <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className="main__top__btns_depatures">
           <i className="fas fa-plane-departure"></i>
           All depatures
-          </button>
-        <button className="main__top__btns_arrivals">
+          </Link>
+        <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className="main__top__btns_arrivals">
           <i className="fas fa-plane-arrival"></i>
           All arrivals
-          </button>
+          </Link>
       </div>
     </section>
   );
 };
-export default MainTopBlock;
+
+const mapDispatch = {
+  onGetDataForDepatures, 
+  onGetDataForArrivals,
+};
+
+export default connect(null, mapDispatch)(MainTopBlock);

@@ -11,6 +11,9 @@
   height: 70px;
   z-index: 9999;
   &__logo{
+    text-decoration: none;
+    color: $whiteColor;
+    display: block;
     transition: 1s;
     margin-left: 20px;
     @media(min-width:600px){

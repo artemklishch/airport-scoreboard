@@ -2,32 +2,39 @@
 
 .scheduleList {
   padding: 40px 0;
+  background-color: #e7efec;
   &__data {
     background-color: #fff;
   }
   &__links {
     position: relative;
     margin-bottom: 60px;
-    i{
+    i {
       margin-right: 30px;
     }
-    &_departures{
+    &_departures {
       position: absolute;
       left: 0;
-      border-top-right-radius: 2em; 
+      border-top-right-radius: 2em;
+      background-color: $blueColor;
+      z-index: 0;
+      color: $whiteColor;
     }
-    &_arrivals{
+    &_arrivals {
       position: absolute;
       right: 0;
       border-top-left-radius: 2em;
+      background-color: $blueColor;
+      z-index: 0;
+      color: $whiteColor;
     }
     a {
       display: inline-block;
       text-decoration: none;
-      color: $whiteColor;
-      background-color: $blueColor;
+      // color: $whiteColor;
+      // background-color: $blueColor;
       width: 60%;
-      z-index: 0;
+      // z-index: 0;
       height: 60px;
       line-height: 60px;
       text-align: center;
@@ -38,6 +45,13 @@
       }
     }
   }
+}
+
+
+.btn_on_focus {
+  color: $blueColor;
+  background-color: $whiteColor;
+  z-index: 1;
 }
 
 .main__top_header__scheduleList {
