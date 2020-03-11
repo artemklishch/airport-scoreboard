@@ -5,7 +5,7 @@ import Footer from './footer/Footer';
 import ScheduleList from './main/main_lists_schedule/ScheduleList';
 import { Provider } from 'react-redux';
 import store from './store';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 const App = () => {
@@ -13,16 +13,18 @@ const App = () => {
     <Provider store={store}>
       <BrowserRouter>
         <div className="wrapper">
+          <Switch>
           <Route exact path='/'>
             <Header />
             <Main />
             <Footer />
           </Route>
-          <Route path='/schedule'>
+          <Route path='/schedule/:flightType'>
             <Header />
             <ScheduleList />
             <Footer />
           </Route>
+          </Switch>
         </div>
       </BrowserRouter>
     </Provider>

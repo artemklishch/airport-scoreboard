@@ -10,10 +10,10 @@ export const onGetDeparturedFlights = flights => {
   };
 };
 
-export const onGetArrivedFlights = flightType => {
+export const onGetArrivedFlights = flights => {
   return {
     type: ARRIVED,
-    payload: { flightType, } 
+    payload: { flights, } 
   };
 };
 
@@ -23,6 +23,15 @@ export const onGetDataForDepatures = () => {
     onGetDataAboutFlights()
       .then(flights => 
         dispatch(onGetDeparturedFlights(flights.body.departure))
+      );
+  }
+};
+
+export const onGetDataForArrivals = () => {
+  return function(dispatch){
+    onGetDataAboutFlights()
+      .then(flights => 
+        dispatch(onGetArrivedFlights(flights.body.arrival))
       );
   }
 };
