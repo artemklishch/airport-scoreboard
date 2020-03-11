@@ -11,9 +11,11 @@ import classNames from 'classnames';
 const ScheduleList = (props) => {
   const { flights } = props;
   const { flightType } = useParams();
-  
-  const depBtnClass = classNames('scheduleList__links_departures',{'btn_on_focus': true});
-
+  const depBtnClass = classNames('scheduleList__links_departures', { 
+    'btn_on_focus': flightType === 'departure'
+   });
+  const arrBtnClass = classNames('scheduleList__links_arrivals', {
+    'btn_on_focus': flightType === 'arrival' });
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
@@ -25,11 +27,11 @@ const ScheduleList = (props) => {
 
       <div className="scheduleList__data">
         <div className="scheduleList__links">
-          <Link onClick={props.onGetDataForDepatures} to='/schedule/depatures' className={depBtnClass}>
+          <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className={depBtnClass}>
             <i className="fas fa-plane-departure"></i>
             Departures
         </Link>
-          <Link onClick={props.onGetDataForArrivals} to='/schedule/arrivals' className="scheduleList__links_arrivals">
+          <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className={arrBtnClass}>
             <i className="fas fa-plane-arrival"></i>
             Arrivals
         </Link>
@@ -80,7 +82,7 @@ const mapState = state => {
 };
 
 const mapDispatch = {
-  onGetDataForDepatures, 
+  onGetDataForDepatures,
   onGetDataForArrivals,
 };
 
