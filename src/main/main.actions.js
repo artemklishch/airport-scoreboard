@@ -1,10 +1,12 @@
+import { onGetDataAboutFlights } from './main.gateway';
+
 export const DEPARTURED = 'FLIGHTS/DEPSRTURED';
 export const ARRIVED = 'FLIGHTS/ARRIVED';
 
-export const onGetDeparturedFlights = flightType => {
+export const onGetDeparturedFlights = flights => {
   return {
     type: DEPARTURED,
-    payload: { flightType, } 
+    payload: { flights, } 
   };
 };
 
@@ -15,3 +17,12 @@ export const onGetArrivedFlights = flightType => {
   };
 };
 
+
+export const onGetDataForDepatures = () => {
+  return function(dispatch){
+    onGetDataAboutFlights()
+      .then(flights => 
+        dispatch(onGetDeparturedFlights(flights.body.departure))
+      );
+  }
+};

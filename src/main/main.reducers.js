@@ -1,4 +1,5 @@
 import { DEPARTURED, ARRIVED } from './main.actions';
+import { onGetDataAboutFlights } from './main.gateway';
 
 const initialContentState = {
   firstFourBlocks: {
@@ -61,6 +62,10 @@ const initialFlightState = {
 
 export const contentFlightsReducer = (state = initialFlightState, action) => {
   switch(action.type){
+    case DEPARTURED: return {
+      ...state,
+      flights: action.payload.flights
+    };
     default: return state;
   }
 };

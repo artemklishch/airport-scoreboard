@@ -5,3 +5,10 @@ export const firstFourBlocks = state =>
 
 export const secondFourBlocks = state => 
   state.contentForFourBlocks.secondFourBlocks;
+
+
+
+const depaturedFlightsSelector = state => state.flightsData.flights;
+export const onSelectProps = state => {
+
+};

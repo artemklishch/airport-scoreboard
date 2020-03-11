@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 
-const ScheduleList = () => {
+const ScheduleList = (props) => {
+  console.log(props);
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
@@ -49,7 +51,7 @@ const ScheduleList = () => {
                 <p>Belavia</p>
               </td>
             </tr>
-            <tr className="scheduleList__table__tbody_row">
+            {/* <tr className="scheduleList__table__tbody_row">
               <td className="scheduleList__table__tbody_terminal">B</td>
               <td className="scheduleList__table__tbody_planned-time">5:50</td>
               <td className="scheduleList__table__tbody_destintion">Viena</td>
@@ -66,7 +68,7 @@ const ScheduleList = () => {
                 <p>Departed at 6:42</p>
                 <p>Anralia</p>
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
@@ -74,4 +76,11 @@ const ScheduleList = () => {
     </section>
   );
 };
-export default ScheduleList;
+
+const mapState = state => {
+  return {
+    depaturedFlights: state.flightsData.flights,
+  }
+};
+
+export default connect(mapState)(ScheduleList);
