@@ -9,6 +9,7 @@ import classNames from 'classnames';
 
 
 const ScheduleList = (props) => {
+  console.log(props);
   const { flights } = props;
   const { flightType } = useParams();
   const depBtnClass = classNames('scheduleList__links_departures', { 
