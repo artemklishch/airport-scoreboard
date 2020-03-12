@@ -1,22 +1,18 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-class MainTopBlock extends PureComponent{
-  state = {
-    flightNumberInput: '',
-  };
-  onChangeFlightInput = event => 
-    this.setState({ flightNumberInput: event.target.value, });  
-  
-  render(){
+const MainTopBlock = () => {
+  const [flightNum, onChangeFlightNum] = useState('');
+  const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
+ 
     return (
       <section className="main__top">
         <h1 className="main__top_header">Flight search</h1>
         <form action="GET" className="main__top_form">
           <i className="fas fa-search main__top_form-glass"></i>
-          <input onChange={this.onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
-          <Link className="main__top_form-submit" type='submit'>Search</Link>
+          <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
+          <Link to={`/schedule/departure/${flightNum}`} className="main__top_form-submit" type='submit'>Search</Link>
         </form>
         <div className="main__top__btns">
           <Link to='/schedule/departure' className="main__top__btns_depatures">
@@ -30,6 +26,5 @@ class MainTopBlock extends PureComponent{
         </div>
       </section>
     );
-  }
 };
 export default MainTopBlock;

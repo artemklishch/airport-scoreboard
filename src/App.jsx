@@ -19,7 +19,7 @@ const App = () => {
             <Main />
             <Footer />
           </Route>
-          <Route path='/schedule/:flightType'>
+          <Route exact path='/schedule/:flightType'>
             <Header />
             <ScheduleList />
             <Footer />
