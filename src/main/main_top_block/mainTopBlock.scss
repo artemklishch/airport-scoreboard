@@ -102,7 +102,11 @@
       text-align: center;
     }
     &_form-submit{
-      display: block;
+      text-decoration: none;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     &__btns{
       width: 650px;

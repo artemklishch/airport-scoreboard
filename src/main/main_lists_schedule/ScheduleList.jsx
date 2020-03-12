@@ -1,82 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import classNames from 'classnames';
-import { onGetDataAboutFlights,onChangeAnswer } from '../main.gateway';
+import { onGetDataAboutFlights, onChangeAnswer } from '../main.gateway';
+import FlightsTableData from './FlightsTableData';
 
 
 const ScheduleList = () => {
-  const { flightType } = useParams();
-  const [ flightsList, onChangeFlightsList ] = useState([]);
+  const match = useRouteMatch();
+  const flightData = match.path === "/schedule/:flightType"
+    ? match.params.flightType
+    : match.params.certainFlight;
+  const [flightsList, onChangeFlightsList] = useState([]);
   useEffect(() => {
-    onGetDataAboutFlights()
-      .then(flights => {
-        const fl = flightType === 'departure'
-          ? flights.body.departure
-          : flights.body.arrival;
-        const transform = onChangeAnswer(fl);
-        onChangeFlightsList(transform);  
-      })
-  }, [flightType]);
-  const depBtnClass = classNames('scheduleList__links_departures', { 
-    'btn_on_focus': flightType === 'departure'
-   });
+    if (match.path === "/schedule/:flightType") {
+      onGetDataAboutFlights()
+        .then(flights => {
+          const fl = flightData === 'departure'
+            ? flights.body.departure
+            : flights.body.arrival;
+          const transform = onChangeAnswer(fl);
+          onChangeFlightsList(transform);
+        });
+    } else {
+      onGetDataAboutFlights()
+        .then(flights => {
+          const fl = flights.body.departure;
+          const transform = onChangeAnswer(fl)
+            .filter(departureFlight => departureFlight.flightNum === flightData);
+          onChangeFlightsList(transform)
+        });
+    }
+    return () => {
+      onChangeFlightsList([]);
+    };
+  }, [flightData]);
+
+  const [flightNum, onChangeFlightNum] = useState('');
+  const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
+
+  const depBtnClass = classNames('scheduleList__links_departures', {
+    'btn_on_focus': flightData === 'departure' || match.path === "/schedule/departure/:certainFlight"
+  });
   const arrBtnClass = classNames('scheduleList__links_arrivals', {
-    'btn_on_focus': flightType === 'arrival' });
+    'btn_on_focus': flightData === 'arrival'
+  });
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
       <form action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
-        <input type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
-        <button className="main__top_form-submit" type='submit'>Search</button>
+        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
+        <Link to={`/schedule/departure/${flightNum}`} className="main__top_form-submit" type='submit'>Search</Link>
       </form>
 
       <div className="scheduleList__data">
         <div className="scheduleList__links">
-          <Link  to='/schedule/departure' className={depBtnClass}>
+          <Link to='/schedule/departure' className={depBtnClass}>
             <i className="fas fa-plane-departure"></i>
             Departures
         </Link>
-          <Link  to='/schedule/arrival' className={arrBtnClass}>
+          <Link to='/schedule/arrival' className={arrBtnClass}>
             <i className="fas fa-plane-arrival"></i>
             Arrivals
         </Link>
         </div>
-
-        <table className="scheduleList__table">
-          <caption className="scheduleList__table_caption">Today</caption>
-          <thead className="scheduleList__table_thead">
-            <tr>
-              <th>Terminal</th><th>Locale time</th><th>Destination</th><th>Status</th><th>Airline</th><th>Flight</th>
-            </tr>
-          </thead>
-          <tbody className="scheduleList__table__tbody">
-            {
-              flightsList.map(flight => {
-                return <tr key={flight.ID} className="scheduleList__table__tbody_row">
-                  <td className="scheduleList__table__tbody_terminal">{flight.term}</td>
-                  <td className="scheduleList__table__tbody_planned-time">{moment(flight.expectedTime).format('h:mm')}</td>
-                  <td className="scheduleList__table__tbody_destintion">{flight.airport}</td>
-                  <td className="scheduleList__table__tbody_fact-time">{`Departed at ${moment(flight.realTime).format('h:mm')}`}</td>
-                  <td className="scheduleList__table__tbody_airline">{flight.airline}</td>
-                  <td className="scheduleList__table__tbody_flight">{flight.flightNum}</td>
-
-                  <td className="scheduleList__table__tbody_terminal-planned-time_onsmallwidth">
-                    <p>{flight.term}</p>
-                    <p>{flight.realTime}</p>
-                  </td>
-                  <td className="scheduleList__table__tbody_onsmall-width">
-                    <p>{flight.airport}</p>
-                    <p>{`Departed at ${flight.expectedTime}`}</p>
-                    <p>{flight.airline}</p>
-                  </td>
-                </tr>
-              })
-            }
-          </tbody>
-        </table>
+        <FlightsTableData flightsList={flightsList} />
       </div>
     </section>
   );

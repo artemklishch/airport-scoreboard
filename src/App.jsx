@@ -19,16 +19,16 @@ const App = () => {
             <Main />
             <Footer />
           </Route>
-          <Route path='/schedule/:flightType'>
+          <Route exact path='/schedule/:flightType'>
             <Header />
             <ScheduleList />
             <Footer />
           </Route>
-          {/* <Route path='/schedule/departure/:certainFlight'>
+          <Route path='/schedule/departure/:certainFlight'>
             <Header />
             <ScheduleList />
             <Footer />
-          </Route> */}
+          </Route>
           </Switch>
         </div>
       </BrowserRouter>
