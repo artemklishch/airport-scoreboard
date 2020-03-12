@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { onSelectProps } from '../main.selectors';
 import moment from 'moment';
-import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { onGetDataAboutFlights } from '../main.gateway';
+import { onSelectProps } from '../main.selectors';
 
 
-const ScheduleList = (props) => {
-  const { flights } = props;
-  const [ flightsList, onChangeFlightsList ] = useState(flights);
-  useEffect(() => {
-    
-  }, flightsList[0].ID);
+const ScheduleList = () => {
   const { flightType } = useParams();
+  const [ flightsList, onChangeFlightsList ] = useState([]);
+  useEffect(() => {
+    onGetDataAboutFlights()
+      .then(flights => {
+        const fl = flightType === 'departure'
+          ? flights.body.departure
+          : flights.body.arrival;
+        const transform = onSelectProps(fl);
+        onChangeFlightsList(transform);  
+      })
+  }, [flightType]);
+  console.log(flightsList);
   const depBtnClass = classNames('scheduleList__links_departures', { 
     'btn_on_focus': flightType === 'departure'
    });
@@ -31,11 +37,11 @@ const ScheduleList = (props) => {
 
       <div className="scheduleList__data">
         <div className="scheduleList__links">
-          <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className={depBtnClass}>
+          <Link  to='/schedule/departure' className={depBtnClass}>
             <i className="fas fa-plane-departure"></i>
             Departures
         </Link>
-          <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className={arrBtnClass}>
+          <Link  to='/schedule/arrival' className={arrBtnClass}>
             <i className="fas fa-plane-arrival"></i>
             Arrivals
         </Link>
@@ -50,7 +56,8 @@ const ScheduleList = (props) => {
           </thead>
           <tbody className="scheduleList__table__tbody">
             {
-              flights.map(flight => {
+            /* {
+              flightsList.map(flight => {
                 return <tr key={flight.ID} className="scheduleList__table__tbody_row">
                   <td className="scheduleList__table__tbody_terminal">{flight.term}</td>
                   <td className="scheduleList__table__tbody_planned-time">{moment(flight.expectedTime).format('h:mm')}</td>
@@ -70,24 +77,11 @@ const ScheduleList = (props) => {
                   </td>
                 </tr>
               })
-            }
+            } */}
           </tbody>
         </table>
       </div>
-
     </section>
   );
 };
-
-const mapState = state => {
-  return {
-    flights: onSelectProps(state),
-  }
-};
-
-const mapDispatch = {
-  onGetDataForDepatures,
-  onGetDataForArrivals,
-};
-
-export default connect(mapState, mapDispatch)(ScheduleList);
+export default ScheduleList;
