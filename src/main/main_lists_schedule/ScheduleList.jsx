@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import classNames from 'classnames';
 import { onGetDataAboutFlights,onChangeAnswer } from '../main.gateway';
 
 
 const ScheduleList = () => {
   const { flightType } = useParams();
+  const match = useRouteMatch();
+  console.log(match.path === "/schedule/:flightType");
+  console.log(match.params.flightType === 'departure');
+  // const flightData = match.path === "/schedule/:flightType"
+  //   ? match.params.flightType
+  //   : match.params.certainFlight;
   const [ flightsList, onChangeFlightsList ] = useState([]);
   useEffect(() => {
     onGetDataAboutFlights()
@@ -17,7 +23,10 @@ const ScheduleList = () => {
           : flights.body.arrival;
         const transform = onChangeAnswer(fl);
         onChangeFlightsList(transform);  
-      })
+      });
+    return () => {
+      onChangeFlightsList([]);  
+    };
   }, [flightType]);
   const depBtnClass = classNames('scheduleList__links_departures', { 
     'btn_on_focus': flightType === 'departure'

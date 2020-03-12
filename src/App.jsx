@@ -24,11 +24,11 @@ const App = () => {
             <ScheduleList />
             <Footer />
           </Route>
-          {/* <Route path='/schedule/departure/:certainFlight'>
+          <Route path='/schedule/departure/:certainFlight'>
             <Header />
             <ScheduleList />
             <Footer />
-          </Route> */}
+          </Route>
           </Switch>
         </div>
       </BrowserRouter>
