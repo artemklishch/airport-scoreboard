@@ -1,5 +1,3 @@
-import { DEPARTURED, ARRIVED } from './main.actions';
-
 const initialContentState = {
   firstFourBlocks: {
     first: {
@@ -50,25 +48,4 @@ export const contentReducer = (state = initialContentState, action) => {
   switch(action.type){
     default: return state;
   };
-};
-
-
-
-
-const initialFlightState = {
-  flights: [],
-};
-
-export const contentFlightsReducer = (state = initialFlightState, action) => {
-  switch(action.type){
-    case DEPARTURED: return {
-      ...state,
-      flights: action.payload.flights
-    };
-    case ARRIVED: return {
-      ...state,
-      flights: action.payload.flights
-    };
-    default: return state;
-  }
 };

@@ -24,6 +24,11 @@ const App = () => {
             <ScheduleList />
             <Footer />
           </Route>
+          {/* <Route path='/schedule/departure/:certainFlight'>
+            <Header />
+            <ScheduleList />
+            <Footer />
+          </Route> */}
           </Switch>
         </div>
       </BrowserRouter>
