@@ -9,8 +9,11 @@ import classNames from 'classnames';
 
 
 const ScheduleList = (props) => {
-  console.log(props);
   const { flights } = props;
+  const [ flightsList, onChangeFlightsList ] = useState(flights);
+  useEffect(() => {
+    
+  }, flightsList[0].ID);
   const { flightType } = useParams();
   const depBtnClass = classNames('scheduleList__links_departures', { 
     'btn_on_focus': flightType === 'departure'
