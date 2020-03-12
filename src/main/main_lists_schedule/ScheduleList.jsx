@@ -3,8 +3,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { onGetDataAboutFlights } from '../main.gateway';
-import { onSelectProps } from '../main.selectors';
+import { onGetDataAboutFlights,onChangeAnswer } from '../main.gateway';
 
 
 const ScheduleList = () => {
@@ -16,11 +15,10 @@ const ScheduleList = () => {
         const fl = flightType === 'departure'
           ? flights.body.departure
           : flights.body.arrival;
-        const transform = onSelectProps(fl);
+        const transform = onChangeAnswer(fl);
         onChangeFlightsList(transform);  
       })
   }, [flightType]);
-  console.log(flightsList);
   const depBtnClass = classNames('scheduleList__links_departures', { 
     'btn_on_focus': flightType === 'departure'
    });
@@ -56,7 +54,6 @@ const ScheduleList = () => {
           </thead>
           <tbody className="scheduleList__table__tbody">
             {
-            /* {
               flightsList.map(flight => {
                 return <tr key={flight.ID} className="scheduleList__table__tbody_row">
                   <td className="scheduleList__table__tbody_terminal">{flight.term}</td>
@@ -77,7 +74,7 @@ const ScheduleList = () => {
                   </td>
                 </tr>
               })
-            } */}
+            }
           </tbody>
         </table>
       </div>
