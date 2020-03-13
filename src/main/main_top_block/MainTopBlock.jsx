@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-
-const MainTopBlock = () => {
+const MainTopBlock = (props) => {
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
- 
+  const formSubmit = event => {
+    event.preventDefault();
+    if(flightNum !== ''){
+      return props.history.push(`/schedule/departure/${flightNum}`);
+    }else return; 
+  };
+
     return (
       <section className="main__top">
         <h1 className="main__top_header">Flight search</h1>
-        <form action="GET" className="main__top_form">
+        <form onSubmit={formSubmit} action="GET" className="main__top_form">
           <i className="fas fa-search main__top_form-glass"></i>
           <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
-          <Link to={`/schedule/departure/${flightNum}`} className="main__top_form-submit" type='submit'>Search</Link>
+          <button className="main__top_form-submit" type='submit'>Search</button>
         </form>
         <div className="main__top__btns">
           <Link to='/schedule/departure' className="main__top__btns_depatures">
@@ -27,4 +32,4 @@ const MainTopBlock = () => {
       </section>
     );
 };
-export default MainTopBlock;
+export default withRouter(MainTopBlock);
