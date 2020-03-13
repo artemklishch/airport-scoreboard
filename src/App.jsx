@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 const App = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/airport_scoreboard' : '/'}>
+      <BrowserRouter>
         <div className="wrapper">
           <Switch>
           <Route exact path='/'>
