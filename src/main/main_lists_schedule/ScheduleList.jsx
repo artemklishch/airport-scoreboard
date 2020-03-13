@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useRouteMatch } from 'react-router-dom';
+import { Link, withRouter, useRouteMatch } from 'react-router-dom';
 import classNames from 'classnames';
 import { onGetDataAboutFlights, onChangeAnswer } from '../main.gateway';
 import FlightsTableData from './FlightsTableData';
 
 
-const ScheduleList = () => {
+const ScheduleList = (props) => {
   const match = useRouteMatch();
   const flightData = match.path === "/schedule/:flightType"
     ? match.params.flightType
@@ -39,6 +38,13 @@ const ScheduleList = () => {
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
+  const formSubmit = event => {
+    event.preventDefault();
+    if(flightNum !== ''){
+      return props.history.push(`/schedule/departure/${flightNum}`);
+    }else return; 
+  };
+
   const depBtnClass = classNames('scheduleList__links_departures', {
     'btn_on_focus': flightData === 'departure' || match.path === "/schedule/departure/:certainFlight"
   });
@@ -48,10 +54,10 @@ const ScheduleList = () => {
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
-      <form action="GET" className="main__top_form">
+      <form onSubmit={formSubmit} action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
         <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
-        <Link to={`/schedule/departure/${flightNum}`} className="main__top_form-submit" type='submit'>Search</Link>
+        <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
 
       <div className="scheduleList__data">
@@ -70,4 +76,4 @@ const ScheduleList = () => {
     </section>
   );
 };
-export default ScheduleList;
+export default withRouter(ScheduleList);
