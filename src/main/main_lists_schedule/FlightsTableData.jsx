@@ -12,7 +12,8 @@ const FlightsTableData = ({flightsList}) => {
           </thead>
           <tbody className="scheduleList__table__tbody">
             {
-              flightsList.map(flight => {
+              flightsList.length !== 0
+              ? flightsList.map(flight => {
                 return <tr key={flight.ID} className="scheduleList__table__tbody_row">
                   <td className="scheduleList__table__tbody_terminal">{flight.term}</td>
                   <td className="scheduleList__table__tbody_planned-time">{moment(flight.expectedTime).format('h:mm')}</td>
@@ -32,6 +33,9 @@ const FlightsTableData = ({flightsList}) => {
                   </td>
                 </tr>
               })
+              : <tr className="scheduleList__table__tbody_row">
+                <td>No flights</td>
+              </tr>
             }
           </tbody>
         </table>
