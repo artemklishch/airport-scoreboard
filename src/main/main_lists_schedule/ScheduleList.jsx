@@ -12,37 +12,34 @@ const ScheduleList = (props) => {
     : match.params.certainFlight;
   const [flightsList, onChangeFlightsList] = useState([]);
   useEffect(() => {
-    if (match.path === "/schedule/:flightType") {
-      onGetDataAboutFlights()
+    match.path === "/schedule/:flightType"
+      ? onGetDataAboutFlights()
         .then(flights => {
           const fl = flightData === 'departure'
             ? flights.body.departure
             : flights.body.arrival;
           const transform = onChangeAnswer(fl);
           onChangeFlightsList(transform);
-        });
-    } else {
-      onGetDataAboutFlights()
+        })
+      : onGetDataAboutFlights()
         .then(flights => {
           const fl = flights.body.departure;
           const transform = onChangeAnswer(fl)
             .filter(departureFlight => departureFlight.flightNum === flightData);
           onChangeFlightsList(transform)
         });
-    }
     return () => {
       onChangeFlightsList([]);
     };
   }, [flightData]);
-
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
   const formSubmit = event => {
     event.preventDefault();
-    if(flightNum !== ''){
+    if (flightNum !== '') {
       return props.history.push(`/schedule/departure/${flightNum}`);
-    }else return; 
+    } else return;
   };
 
   const depBtnClass = classNames('scheduleList__links_departures', {
