@@ -10,29 +10,29 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/test' : '/'}>
+      <Provider store={store}>
         <div className="wrapper">
           <Switch>
-          <Route exact path='/'>
-            <Header />
-            <Main />
-            <Footer />
-          </Route>
-          <Route exact path='/schedule/:flightType'>
-            <Header />
-            <ScheduleList />
-            <Footer />
-          </Route>
-          <Route path='/schedule/departure/:certainFlight'>
-            <Header />
-            <ScheduleList />
-            <Footer />
-          </Route>
+            <Route exact path='/'>
+              <Header />
+              <Main />
+              <Footer />
+            </Route>
+            <Route exact path='/schedule/:flightType'>
+              <Header />
+              <ScheduleList />
+              <Footer />
+            </Route>
+            <Route path='/schedule/departure/:certainFlight'>
+              <Header />
+              <ScheduleList />
+              <Footer />
+            </Route>
           </Switch>
         </div>
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   );
 };
 export default App; 
