@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const App = () => {
   return (
-    <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/test' : '/'}>
+    <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/airport_scoreboard' : '/'}>
       <Provider store={store}>
         <div className="wrapper">
           <Switch>
