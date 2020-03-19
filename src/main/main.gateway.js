@@ -1,6 +1,6 @@
 export const onGetDataAboutFlights = () => {
   const todayDate = new Date().toLocaleDateString().split('.').join('-');
-  return fetch(`http://api.iev.aero/api/flights/${todayDate}`)
+  return fetch(`https://api.iev.aero/api/flights/${todayDate}`)
     .then(response => {
       if(response.ok) return response.json();
       throw new Error();
