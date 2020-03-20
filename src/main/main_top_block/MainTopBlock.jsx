@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
 
@@ -7,12 +7,17 @@ const MainTopBlock = (props) => {
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
+  // const onFormSubmit = event => {
+  //   event.preventDefault();
+  //   props.onGetDataForCertainDepatures(flightNum);
+  //   onChangeFlightNum('');
+  // }
   const onFormSubmit = event => {
     event.preventDefault();
-    props.onGetDataForCertainDepatures(flightNum);
-    onChangeFlightNum('');
-  }
-  
+    if(flightNum !== ''){
+      return props.history.push(`/schedule/departure/${flightNum}`);
+    }else return; 
+  };
   return (
     <section className="main__top">
       <h1 className="main__top_header">Flight search</h1>
@@ -41,4 +46,4 @@ const mapDispatch = {
   onGetDataForCertainDepatures,
 };
 
-export default connect(null, mapDispatch)(MainTopBlock);
+export default withRouter(connect(null, mapDispatch)(MainTopBlock));

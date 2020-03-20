@@ -10,7 +10,7 @@ import FlightsTableData from './FlightsTableData';
 
 const ScheduleList = (props) => {
   const { flights } = props;
-  const { flightType } = useParams();
+  // const { flightType } = useParams();
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
@@ -20,20 +20,27 @@ const ScheduleList = (props) => {
     onChangeFlightNum('');
   }
 
+  const match = useRouteMatch();
+  const flightData = match.path === '/schedule/:flightType'
+      ? match.params.flightType
+      : match.params.certainFlight;
+
   useEffect(() => {
-    flightType === 'departure'
+    flightData === 'departure'
       ? props.onGetDataForDepatures()
-      : props.onGetDataForArrivals();
-  }, [flightType]);
+      : flightData === 'arrival'
+      ? props.onGetDataForArrivals()
+      : props.onGetDataForCertainDepatures(flightNum);
+  }, [flightData]);
 
   const depBtnClass = classNames('scheduleList__links_departures', {
-    'btn_on_focus': flightType === 'departure'
+    'btn_on_focus': flightData === 'departure'
   });
   const arrBtnClass = classNames('scheduleList__links_arrivals', {
-    'btn_on_focus': flightType === 'arrival'
+    'btn_on_focus': flightData === 'arrival'
   });
 
-  console.log(flights);
+
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
