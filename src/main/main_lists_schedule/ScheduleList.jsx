@@ -5,7 +5,7 @@ import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatur
 import { Link, useRouteMatch } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
-
+ 
 
 const ScheduleList = (props) => {
   const { flights } = props;
