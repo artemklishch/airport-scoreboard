@@ -9,8 +9,10 @@ import FlightsTableData from './FlightsTableData';
 
 
 const ScheduleList = (props) => {
+
     const { flights } = props;
     const { flightType } = useParams();
+    
     // const [ state, onChangeState ] = useState(flights);
     // console.log(state);
     // useEffect(() => {
