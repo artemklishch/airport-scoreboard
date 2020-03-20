@@ -1,35 +1,34 @@
-import React, { useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
 
 const MainTopBlock = (props) => {
-  const [flightNum, onChangeFlightNum] = useState('');
-  const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
-  const formSubmit = event => {
-    event.preventDefault();
-    if(flightNum !== ''){
-      return props.history.push(`/schedule/departure/${flightNum}`);
-    }else return; 
-  };
-
-    return (
-      <section className="main__top">
-        <h1 className="main__top_header">Flight search</h1>
-        <form onSubmit={formSubmit} action="GET" className="main__top_form">
-          <i className="fas fa-search main__top_form-glass"></i>
-          <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
-          <button className="main__top_form-submit" type='submit'>Search</button>
-        </form>
-        <div className="main__top__btns">
-          <Link to='/schedule/departure' className="main__top__btns_depatures">
-            <i className="fas fa-plane-departure"></i>
-            All depatures
-            </Link>
-          <Link to='/schedule/arrival' className="main__top__btns_arrivals">
-            <i className="fas fa-plane-arrival"></i>
-            All arrivals
-            </Link>
-        </div>
-      </section>
-    );
+  return (
+    <section className="main__top">
+      <h1 className="main__top_header">Flight search</h1>
+      <form action="GET" className="main__top_form">
+        <i className="fas fa-search main__top_form-glass"></i>
+        <input type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
+        <button className="main__top_form-submit" type='submit'>Search</button>
+      </form>
+      <div className="main__top__btns">
+        <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className="main__top__btns_depatures">
+          <i className="fas fa-plane-departure"></i>
+          All depatures
+          </Link>
+        <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className="main__top__btns_arrivals">
+          <i className="fas fa-plane-arrival"></i>
+          All arrivals
+          </Link>
+      </div>
+    </section>
+  );
 };
-export default withRouter(MainTopBlock);
+
+const mapDispatch = {
+  onGetDataForDepatures, 
+  onGetDataForArrivals,
+};
+
+export default connect(null, mapDispatch)(MainTopBlock);
