@@ -29,7 +29,7 @@ const ScheduleList = (props) => {
       : flightData === 'arrival'
       ? props.onGetDataForArrivals()
       : props.onGetDataForCertainDepatures(flightNum);
-  }, [flightData]);
+  }, [flightData]); 
 
   const depBtnClass = classNames('scheduleList__links_departures', {
     'btn_on_focus': flightData === 'departure'
