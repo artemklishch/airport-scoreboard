@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
+import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
 
 const MainTopBlock = (props) => {
+  const [flightNum, onChangeFlightNum] = useState('');
+  const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
+
+  const onFormSubmit = event => {
+    event.preventDefault();
+    props.onGetDataForCertainDepatures(flightNum);
+    onChangeFlightNum('');
+  }
   return (
     <section className="main__top">
       <h1 className="main__top_header">Flight search</h1>
-      <form action="GET" className="main__top_form">
+      <form onSubmit={onFormSubmit} action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
-        <input type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
+        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' value={flightNum} />
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
       <div className="main__top__btns">
@@ -29,6 +37,7 @@ const MainTopBlock = (props) => {
 const mapDispatch = {
   onGetDataForDepatures, 
   onGetDataForArrivals,
+  onGetDataForCertainDepatures,
 };
 
 export default connect(null, mapDispatch)(MainTopBlock);
