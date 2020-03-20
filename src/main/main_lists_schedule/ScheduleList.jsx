@@ -15,7 +15,7 @@ const ScheduleList = (props) => {
     const [ state, onChangeState ] = useState(flights);
     useEffect(() => {
       function d(){
-        console.log(flightType);  
+        onChangeState(flights);
       }
     document.addEventListener('load', d);
 
