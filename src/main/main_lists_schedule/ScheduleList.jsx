@@ -12,13 +12,10 @@ const ScheduleList = (props) => {
     const { flights } = props;
     const { flightType } = useParams();
     
-    const [ state, onChangeState ] = useState(flights);
     useEffect(() => {
-      function d(){
-        onChangeState(flights);
-      }
-    document.addEventListener('load', d);
-
+      flightType === 'departure'
+        ? props.onGetDataForDepatures()
+        : props.onGetDataForArrivals();
     }, [flightType]);
     const depBtnClass = classNames('scheduleList__links_departures', {
       'btn_on_focus': flightType === 'departure'
@@ -46,8 +43,7 @@ const ScheduleList = (props) => {
             Arrivals
         </Link>
           </div>
-
-          <FlightsTableData flightsList={state} />
+          <FlightsTableData flightsList={flights} />
         </div>
 
       </section>
