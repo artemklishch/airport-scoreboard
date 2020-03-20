@@ -23,13 +23,13 @@ const ScheduleList = (props) => {
       ? match.params.flightType
       : match.params.certainFlight;
 
-  useEffect(() => {
-    flightData === 'departure'
-      ? props.onGetDataForDepatures()
-      : flightData === 'arrival'
-      ? props.onGetDataForArrivals()
-      : props.onGetDataForCertainDepatures(flightNum);
-  }, [flightData]); 
+      useEffect(() => {
+        flightData === 'departure'
+          ? props.onGetDataForDepatures()
+          : flightData === match.params.certainFlight
+          ? props.onGetDataForCertainDepatures(match.params.certainFlight)
+          : props.onGetDataForArrivals();
+      }, [flightData]); 
 
   const depBtnClass = classNames('scheduleList__links_departures', {
     'btn_on_focus': flightData === 'departure'
