@@ -5,7 +5,7 @@ import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatur
 import { Link, useRouteMatch } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
- 
+
 
 const ScheduleList = (props) => {
   const { flights } = props;
@@ -20,19 +20,19 @@ const ScheduleList = (props) => {
 
   const match = useRouteMatch();
   const flightData = match.path === '/schedule/:flightType'
-      ? match.params.flightType
-      : match.params.certainFlight;
+    ? match.params.flightType
+    : match.params.certainFlight;
 
-      useEffect(() => {
-        flightData === 'departure'
-          ? props.onGetDataForDepatures()
-          : flightData === match.params.certainFlight
-          ? props.onGetDataForCertainDepatures(match.params.certainFlight)
-          : props.onGetDataForArrivals();
-      }, [flightData]); 
+  useEffect(() => {
+    flightData === 'departure'
+      ? props.onGetDataForDepatures()
+      : flightData === match.params.certainFlight
+        ? props.onGetDataForCertainDepatures(match.params.certainFlight)
+        : props.onGetDataForArrivals();
+  }, [flightData]);
 
   const depBtnClass = classNames('scheduleList__links_departures', {
-    'btn_on_focus': flightData === 'departure'
+    'btn_on_focus': flightData === 'departure' || flightData === match.params.certainFlight
   });
   const arrBtnClass = classNames('scheduleList__links_arrivals', {
     'btn_on_focus': flightData === 'arrival'
