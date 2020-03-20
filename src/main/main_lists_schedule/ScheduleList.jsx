@@ -11,7 +11,6 @@ import FlightsTableData from './FlightsTableData';
 const ScheduleList = (props) => {
   const { flights } = props;
   const { flightType } = useParams();
-  console.log(props);
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
@@ -33,6 +32,7 @@ const ScheduleList = (props) => {
   const arrBtnClass = classNames('scheduleList__links_arrivals', {
     'btn_on_focus': flightType === 'arrival'
   });
+
 
   return (
     <section className="scheduleList">
