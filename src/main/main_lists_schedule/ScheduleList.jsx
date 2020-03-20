@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { onSelectProps } from '../main.selectors';
 import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { useParams, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
@@ -33,7 +33,7 @@ const ScheduleList = (props) => {
     'btn_on_focus': flightType === 'arrival'
   });
 
-
+  console.log(flights);
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
@@ -75,4 +75,4 @@ const mapDispatch = {
   onGetDataForCertainDepatures,
 };
 
-export default withRouter(connect(mapState, mapDispatch)(ScheduleList));
+export default connect(mapState, mapDispatch)(ScheduleList);
