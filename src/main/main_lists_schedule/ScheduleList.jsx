@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { onSelectProps } from '../main.selectors';
 import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
 
@@ -23,6 +23,12 @@ const ScheduleList = (props) => {
     const arrBtnClass = classNames('scheduleList__links_arrivals', {
       'btn_on_focus': flightType === 'arrival'
     });
+    const formSubmit = event => {
+      event.preventDefault();
+      if (flightNum !== '') {
+        return props.history.push(`/schedule/departure/${flightNum}`);
+      } else return;
+    };
     return (
       <section className="scheduleList">
         <h1 className="main__top_header__scheduleList">Flight search</h1>
@@ -61,4 +67,4 @@ const mapDispatch = {
   onGetDataForArrivals,
 };
 
-export default connect(mapState, mapDispatch)(ScheduleList);
+export default withRouter(connect(mapState, mapDispatch)(ScheduleList));
