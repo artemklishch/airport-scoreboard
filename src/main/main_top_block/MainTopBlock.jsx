@@ -7,17 +7,13 @@ const MainTopBlock = (props) => {
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
-  // const onFormSubmit = event => {
-  //   event.preventDefault();
-  //   props.onGetDataForCertainDepatures(flightNum);
-  //   onChangeFlightNum('');
-  // }
   const onFormSubmit = event => {
     event.preventDefault();
     if(flightNum !== ''){
       return props.history.push(`/schedule/departure/${flightNum}`);
     }else return; 
   };
+  
   return (
     <section className="main__top">
       <h1 className="main__top_header">Flight search</h1>

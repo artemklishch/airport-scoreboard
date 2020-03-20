@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { onSelectProps } from '../main.selectors';
 import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { useParams, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
 
 
 const ScheduleList = (props) => {
   const { flights } = props;
-  // const { flightType } = useParams();
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
