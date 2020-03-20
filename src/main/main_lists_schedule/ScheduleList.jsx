@@ -10,7 +10,7 @@ import FlightsTableData from './FlightsTableData';
 
 const ScheduleList = (props) => {
   const { flights } = props;
-  let { flightType } = useParams();
+  const { flightType } = useParams();
 
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
