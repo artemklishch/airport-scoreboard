@@ -1,4 +1,4 @@
-import { DEPARTURED, ARRIVED } from './main.actions';
+import { DEPARTURED, ARRIVED, CERTAIN_DEPARTURED } from './main.actions';
 
 const initialContentState = {
   firstFourBlocks: {
@@ -56,7 +56,7 @@ export const contentReducer = (state = initialContentState, action) => {
 
 
 const initialFlightState = {
-  flights: [],
+  flights: null,
 };
 
 export const contentFlightsReducer = (state = initialFlightState, action) => {
@@ -66,6 +66,10 @@ export const contentFlightsReducer = (state = initialFlightState, action) => {
       flights: action.payload.flights
     };
     case ARRIVED: return {
+      ...state,
+      flights: action.payload.flights
+    };
+    case CERTAIN_DEPARTURED: return {
       ...state,
       flights: action.payload.flights
     };

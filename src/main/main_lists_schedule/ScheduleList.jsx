@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { onSelectProps } from '../main.selectors';
-import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
+import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
 import { Link } from 'react-router-dom';
 import { useParams, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
@@ -12,16 +12,21 @@ const ScheduleList = (props) => {
   const { flights } = props;
   let { flightType } = useParams();
 
+  const [flightNum, onChangeFlightNum] = useState('');
+  const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
-  const formSubmit = () => {
-   
-  };
+  const onFormSubmit = event => {
+    event.preventDefault();
+    props.onGetDataForCertainDepatures(flightNum);
+    onChangeFlightNum('');
+  }
 
   useEffect(() => {
     flightType === 'departure'
       ? props.onGetDataForDepatures()
       : props.onGetDataForArrivals();
   }, [flightType]);
+
   const depBtnClass = classNames('scheduleList__links_departures', {
     'btn_on_focus': flightType === 'departure'
   });
@@ -29,15 +34,12 @@ const ScheduleList = (props) => {
     'btn_on_focus': flightType === 'arrival'
   });
 
-  const [flightNum, onChangeFlightNum] = useState('');
-  const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
-
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
-      <form onSubmit={onSuformSubmitbmit} action="GET" className="main__top_form">
+      <form onSubmit={onFormSubmit} action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
-        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
+        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' value={flightNum} />
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
 
@@ -52,7 +54,9 @@ const ScheduleList = (props) => {
             Arrivals
         </Link>
         </div>
-        <FlightsTableData flightsList={flights} />
+        {
+          flights && <FlightsTableData flightsList={flights} />
+        }
       </div>
 
     </section>
@@ -68,6 +72,7 @@ const mapState = state => {
 const mapDispatch = {
   onGetDataForDepatures,
   onGetDataForArrivals,
+  onGetDataForCertainDepatures,
 };
 
 export default withRouter(connect(mapState, mapDispatch)(ScheduleList));
