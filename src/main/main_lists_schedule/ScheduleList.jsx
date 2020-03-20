@@ -2,23 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { onSelectProps } from '../main.selectors';
 import { onGetDataForDepatures, onGetDataForArrivals } from '../main.actions';
-import { Link,  withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
 
 
 const ScheduleList = (props) => {
-  console.log(props);
     const { flights } = props;
     const { flightType } = useParams();
     
-    // const [ state, onChangeState ] = useState(flights);
-    // console.log(state);
-    // useEffect(() => {
-    //   onChangeState(flights);
-      
-    // }, [flightType]);
+    const [ state, onChangeState ] = useState(flights);
+    useEffect(() => {
+      function d(){
+        console.log(flightType);  
+      }
+    document.addEventListener('load', d);
+
+    }, [flightType]);
     const depBtnClass = classNames('scheduleList__links_departures', {
       'btn_on_focus': flightType === 'departure'
     });
@@ -46,7 +47,7 @@ const ScheduleList = (props) => {
         </Link>
           </div>
 
-          {/* <FlightsTableData flightsList={flights} /> */}
+          <FlightsTableData flightsList={state} />
         </div>
 
       </section>
