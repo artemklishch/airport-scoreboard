@@ -1,76 +1,78 @@
-import React, { useState, useEffect } from 'react';
-import { Link, withRouter, useRouteMatch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { onSelectProps } from '../main.selectors';
+import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
+import { Link } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-import { onGetDataAboutFlights, onChangeAnswer } from '../main.gateway';
 import FlightsTableData from './FlightsTableData';
 
 
 const ScheduleList = (props) => {
-  const match = useRouteMatch();
-  const flightData = match.path === "/schedule/:flightType"
-    ? match.params.flightType
-    : match.params.certainFlight;
-  const [flightsList, onChangeFlightsList] = useState([]);
-  useEffect(() => {
-    match.path === "/schedule/:flightType"
-      ? onGetDataAboutFlights()
-        .then(flights => {
-          const fl = flightData === 'departure'
-            ? flights.body.departure
-            : flights.body.arrival;
-          const transform = onChangeAnswer(fl);
-          onChangeFlightsList(transform);
-        })
-      : onGetDataAboutFlights()
-        .then(flights => {
-          const fl = flights.body.departure;
-          const transform = onChangeAnswer(fl)
-            .filter(departureFlight => departureFlight.flightNum === flightData);
-          onChangeFlightsList(transform)
-        });
-    return () => {
-      onChangeFlightsList([]);
-    };
-  }, [flightData]);
+  const { flights } = props;
+  let { flightType } = useParams();
+
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
-  const formSubmit = event => {
+  const onFormSubmit = event => {
     event.preventDefault();
-    if (flightNum !== '') {
-      return props.history.push(`/schedule/departure/${flightNum}`);
-    } else return;
-  };
+    props.onGetDataForCertainDepatures(flightNum);
+    onChangeFlightNum('');
+  }
+
+  useEffect(() => {
+    flightType === 'departure'
+      ? props.onGetDataForDepatures()
+      : props.onGetDataForArrivals();
+  }, [flightType]);
 
   const depBtnClass = classNames('scheduleList__links_departures', {
-    'btn_on_focus': flightData === 'departure' || match.path === "/schedule/departure/:certainFlight"
+    'btn_on_focus': flightType === 'departure'
   });
   const arrBtnClass = classNames('scheduleList__links_arrivals', {
-    'btn_on_focus': flightData === 'arrival'
+    'btn_on_focus': flightType === 'arrival'
   });
+
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
-      <form onSubmit={formSubmit} action="GET" className="main__top_form">
+      <form onSubmit={onFormSubmit} action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
-        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
+        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' value={flightNum} />
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
 
       <div className="scheduleList__data">
         <div className="scheduleList__links">
-          <Link to='/schedule/departure' className={depBtnClass}>
+          <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className={depBtnClass}>
             <i className="fas fa-plane-departure"></i>
             Departures
         </Link>
-          <Link to='/schedule/arrival' className={arrBtnClass}>
+          <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className={arrBtnClass}>
             <i className="fas fa-plane-arrival"></i>
             Arrivals
         </Link>
         </div>
-        <FlightsTableData flightsList={flightsList} />
+        {
+          flights && <FlightsTableData flightsList={flights} />
+        }
       </div>
+
     </section>
   );
 };
-export default withRouter(ScheduleList);
+
+const mapState = state => {
+  return {
+    flights: onSelectProps(state),
+  }
+};
+
+const mapDispatch = {
+  onGetDataForDepatures,
+  onGetDataForArrivals,
+  onGetDataForCertainDepatures,
+};
+
+export default withRouter(connect(mapState, mapDispatch)(ScheduleList));
