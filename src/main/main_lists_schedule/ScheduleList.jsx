@@ -17,14 +17,13 @@ const ScheduleList = (props) => {
 
   const onFormSubmit = event => {
     event.preventDefault();
-    props.onGetDataForCertainDepatures(flightNum);
-    onChangeFlightNum('');
+    props
   }
 
   useEffect(() => {
-    flightType === 'departure'
-      ? props.onGetDataForDepatures()
-      : props.onGetDataForArrivals();
+    // flightType === 'departure'
+    //   ? props.onGetDataForDepatures()
+    //   : props.onGetDataForArrivals();
   }, [flightType]);
 
   const depBtnClass = classNames('scheduleList__links_departures', {
@@ -39,7 +38,7 @@ const ScheduleList = (props) => {
       <h1 className="main__top_header__scheduleList">Flight search</h1>
       <form onSubmit={onFormSubmit} action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
-        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' value={flightNum} />
+        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
 
