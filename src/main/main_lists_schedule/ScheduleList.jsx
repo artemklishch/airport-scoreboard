@@ -13,7 +13,7 @@ const ScheduleList = (props) => {
   let { flightType } = useParams();
 
 
-  const onSubmit = () => {
+  const formSubmit = () => {
    
   };
 
@@ -35,7 +35,7 @@ const ScheduleList = (props) => {
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
-      <form onSubmit={onSubmit} action="GET" className="main__top_form">
+      <form onSubmit={onSuformSubmitbmit} action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
         <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
         <button className="main__top_form-submit" type='submit'>Search</button>
