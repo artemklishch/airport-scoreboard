@@ -9,7 +9,7 @@ import FlightsTableData from './FlightsTableData';
 
 
 const ScheduleList = (props) => {
-
+  console.log(props);
     const { flights } = props;
     const { flightType } = useParams();
     
@@ -46,7 +46,7 @@ const ScheduleList = (props) => {
         </Link>
           </div>
 
-          <FlightsTableData flightsList={flights} />
+          {/* <FlightsTableData flightsList={flights} /> */}
         </div>
 
       </section>
