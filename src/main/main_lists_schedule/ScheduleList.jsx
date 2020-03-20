@@ -44,7 +44,7 @@ const ScheduleList = (props) => {
         </Link>
           </div>
 
-          <FlightsTableData flightsList={flightsList} />
+          <FlightsTableData flightsList={flights} />
         </div>
 
       </section>
