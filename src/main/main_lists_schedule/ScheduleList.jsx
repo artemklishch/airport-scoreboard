@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { onSelectProps } from '../main.selectors';
+import { flightsSelector } from '../main.selectors';
 import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
 import { Link, useRouteMatch } from 'react-router-dom';
 import classNames from 'classnames';
@@ -70,7 +70,7 @@ const ScheduleList = (props) => {
 
 const mapState = state => {
   return {
-    flights: onSelectProps(state),
+    flights: flightsSelector(state),
   }
 };
 

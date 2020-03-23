@@ -2,12 +2,12 @@
 @import './main/main.scss';
 @import './main/main_top_block/mainTopBlock.scss';
 @import './main/main_middle_block/mainMiddleBlock.scss';
-@import './main/main_middle_block/mainMiddleFourBlock.scss';
-@import './main/main_middle_block/mainMiddlePriorityLine.scss';
+@import './main/main_middle_block/fourBlocks.scss';
+@import './main/main_middle_block/priorityLine.scss';
 @import './main/main_news_block/mainNewsBlock.scss';
 @import './footer/footer.scss';
 @import './main/main_lists_schedule/scheduleList.scss';
-
+ 
 *{
   box-sizing: border-box;
 }

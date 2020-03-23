@@ -1,17 +1,17 @@
 import React from 'react';
-import MainMiddleFourBlock from './MainMiddleFourBlocks';
-import MainMiddlePriorityLine from './MainMiddlePriorityLine'; 
-import MainMiddleTwoBlocks from './MainMiddleTwoBlocks';
+import FourBlocks from './FourBlocks';
+import PriorityLine from './PriorityLine'; 
+import TwoBlocks from './TwoBlocks';
 import { connect } from 'react-redux';
 import * as mainSelectors from '../main.selectors';
 
 const MainMiddleBlock = (props) => {
   return (
     <div className="main__middle">
-      <MainMiddleFourBlock contentData={props.firstFourBlocks} />
-      <MainMiddlePriorityLine />
-      <MainMiddleFourBlock contentData={props.secondFourBlocks} />
-      <MainMiddleTwoBlocks />
+      <FourBlocks contentData={props.firstFourBlocks} />
+      <PriorityLine />
+      <FourBlocks contentData={props.secondFourBlocks} />
+      <TwoBlocks />
     </div>
   );
 };

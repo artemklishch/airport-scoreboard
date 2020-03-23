@@ -34,7 +34,7 @@
   }
 }
 
-.link_text {
+.link-text {
   background-color: $whiteColor;
   display: flex;
   flex-direction: column;
@@ -51,11 +51,11 @@
     width: 70%;
     transition: 0.5s;
   }
-  &_left_message {
+  &_left-message {
     border-top-right-radius: 3em;
     align-self: flex-start;
   }
-  &_right_message {
+  &_right-message {
     border-top-left-radius: 3em;
     align-self: flex-end;
   }
