@@ -13,23 +13,19 @@ const App = () => {
     <BrowserRouter>
       <Provider store={store}>
         <div className="wrapper">
+        <Header />
           <Switch>
             <Route exact path='/'>
-              <Header />
               <Main />
-              <Footer />
             </Route>
             <Route exact path='/schedule/:flightType'>
-              <Header />
               <ScheduleList />
-              <Footer />
             </Route>
             <Route path='/schedule/departure/:certainFlight'>
-              <Header />
               <ScheduleList />
-              <Footer />
             </Route>
           </Switch>
+          <Footer />
         </div>
       </Provider>
     </BrowserRouter>
