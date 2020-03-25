@@ -7,6 +7,7 @@ const dataFromServer = flightsData => {
     payload: { flightsData }
   };
 };
+
 export const onGetDataFromServer = () => {
   return function(dispatch){
     onGetDataAboutFlights()

@@ -10,7 +10,7 @@ import { onGetDataFromServer } from './main/main.actions';
 
 const CompilatingComp = (props) => {
   useEffect(() => {
-      onGetDataFromServer();
+    onGetDataFromServer();
   });
   return (
         <div className="wrapper">
