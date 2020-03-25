@@ -10,6 +10,7 @@ const dataFromServer = flightsData => {
 export const onGetDataFromServer = () => {
   return function(dispatch){
     onGetDataAboutFlights()
-      .then(flights => dispatch(dataFromServer(flights)))
+    .then(flights => console.log(flights));
+      // .then(flights => dispatch(dataFromServer(flights)))
   };
 };
