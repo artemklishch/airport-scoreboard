@@ -1,4 +1,4 @@
-import { DEPARTURED, ARRIVED, CERTAIN_DEPARTURED } from './main.actions';
+import { FLIGHTS_DATA } from './main.actions';
 
 const initialContentState = {
   firstFourBlocks: {
@@ -61,18 +61,7 @@ const initialFlightState = {
 
 export const contentFlightsReducer = (state = initialFlightState, action) => {
   switch(action.type){
-    case DEPARTURED: return {
-      ...state,
-      flights: action.payload.flights
-    };
-    case ARRIVED: return {
-      ...state,
-      flights: action.payload.flights
-    };
-    case CERTAIN_DEPARTURED: return {
-      ...state,
-      flights: action.payload.flights
-    };
+    case FLIGHTS_DATA: return { flights: action.payload, };
     default: return state;
   }
 };

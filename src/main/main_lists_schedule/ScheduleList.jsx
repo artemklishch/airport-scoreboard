@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { flightsSelector } from '../main.selectors';
-import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
+import React, { useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
 
 
-const ScheduleList = (props) => {
-  const { flights } = props;
-  const [flightNum, onChangeFlightNum] = useState('');
-  const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
-
-  const onFormSubmit = event => {
-    event.preventDefault();
-    props.onGetDataForCertainDepatures(flightNum);
-    onChangeFlightNum('');
-  }
+const ScheduleList = () => {
 
   const match = useRouteMatch();
   const flightData = match.path === '/schedule/:flightType'
@@ -24,11 +12,7 @@ const ScheduleList = (props) => {
     : match.params.certainFlight;
 
   useEffect(() => {
-    flightData === 'departure'
-      ? props.onGetDataForDepatures()
-      : flightData === match.params.certainFlight
-        ? props.onGetDataForCertainDepatures(match.params.certainFlight)
-        : props.onGetDataForArrivals();
+   
   }, [flightData]);
 
   const depBtnClass = classNames('scheduleList__links_departures', {
@@ -42,42 +26,27 @@ const ScheduleList = (props) => {
   return (
     <section className="scheduleList">
       <h1 className="main__top_header__scheduleList">Flight search</h1>
-      <form onSubmit={onFormSubmit} action="GET" className="main__top_form">
+      <form action="GET" className="main__top_form">
         <i className="fas fa-search main__top_form-glass"></i>
-        <input onChange={onChangeFlightInput} type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' value={flightNum} />
+        <input type="text" className="main__top_form-input" placeholder='Airline, destination or flight #' />
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
 
       <div className="scheduleList__data">
         <div className="scheduleList__links">
-          <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className={depBtnClass}>
+          <Link to='/schedule/departure' className={depBtnClass}>
             <i className="fas fa-plane-departure"></i>
             Departures
         </Link>
-          <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className={arrBtnClass}>
+          <Link to='/schedule/arrival' className={arrBtnClass}>
             <i className="fas fa-plane-arrival"></i>
             Arrivals
         </Link>
         </div>
-        {
-          flights && <FlightsTableData flightsList={flights} />
-        }
+        
       </div>
 
     </section>
   );
 };
-
-const mapState = state => {
-  return {
-    flights: flightsSelector(state),
-  }
-};
-
-const mapDispatch = {
-  onGetDataForDepatures,
-  onGetDataForArrivals,
-  onGetDataForCertainDepatures,
-};
-
-export default connect(mapState, mapDispatch)(ScheduleList);
+export default ScheduleList;
