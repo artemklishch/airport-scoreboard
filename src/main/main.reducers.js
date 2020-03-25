@@ -61,7 +61,7 @@ const initialFlightState = {
 
 export const contentFlightsReducer = (state = initialFlightState, action) => {
   switch(action.type){
-    case FLIGHTS_DATA: return { flights: action.payload, };
+    case FLIGHTS_DATA: return { flights: action.payload.flightsData, };
     default: return state;
   }
 };

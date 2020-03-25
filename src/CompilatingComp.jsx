@@ -12,6 +12,7 @@ const CompilatingComp = (props) => {
   useEffect(() => {
     onGetDataFromServer();
   });
+  console.log(props);
   return (
         <div className="wrapper">
         <Header />
