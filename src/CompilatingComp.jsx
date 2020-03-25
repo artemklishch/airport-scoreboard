@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Header from './header/Header';
 import Main from './main/Main';
 import Footer from './footer/Footer';
@@ -8,59 +8,32 @@ import { Route, Switch } from 'react-router-dom';
 import { onGetDataFromServer } from './main/main.actions';
 
 
-// const CompilatingComp = (props) => {
-//   useEffect(() => {
-//     onGetDataFromServer();
-//     console.log(props);
-//   });
-
-//   return (
-//         <div className="wrapper">
-//         <Header />
-//           <Switch>
-//             <Route exact path='/'>
-//               <Main />
-//             </Route>
-//             <Route exact path='/schedule/:flightType'>
-//               <ScheduleList />
-//             </Route>
-//             <Route path='/schedule/departure/:certainFlight'>
-//               <ScheduleList />
-//             </Route>
-//           </Switch>
-//           <Footer />
-//         </div>
-//   );
-// };
-
-class CompilatingComp extends Component {
-  componentDidMount(){
-    onGetDataFromServer();
-    console.log(this.props);
-  }
-  // useEffect(() => {
-  //   onGetDataFromServer();
-  //   console.log(props);
-  // });
-  render() {
-    return (
-      <div className="wrapper">
+const CompilatingComp = (props) => {
+  useEffect(() => {
+    const onGetData = () => {
+      props.onGetDataFromServer();
+    }
+    document.addEventListener('DOMContentLoaded', onGetData);
+    console.log(props);
+  }, [props]);
+  
+  return (
+        <div className="wrapper">
         <Header />
-        <Switch>
-          <Route exact path='/'>
-            <Main />
-          </Route>
-          <Route exact path='/schedule/:flightType'>
-            <ScheduleList />
-          </Route>
-          <Route path='/schedule/departure/:certainFlight'>
-            <ScheduleList />
-          </Route>
-        </Switch>
-        <Footer />
-      </div>
-    );
-  }
+          <Switch>
+            <Route exact path='/'>
+              <Main />
+            </Route>
+            <Route exact path='/schedule/:flightType'>
+              <ScheduleList />
+            </Route>
+            <Route path='/schedule/departure/:certainFlight'>
+              <ScheduleList />
+            </Route>
+          </Switch>
+          <Footer />
+        </div>
+  );
 };
 
 const mapState = (state) => {
