@@ -3,12 +3,13 @@ import Header from './header/Header';
 import Main from './main/Main';
 import Footer from './footer/Footer';
 import ScheduleList from './main/main_lists_schedule/ScheduleList';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import store from './store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
-const App = () => {
+const App = (props) => {
+  console.log(props);
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -32,6 +33,10 @@ const App = () => {
   );
 };
 
+const mapState = (state) => {
+  return {
+    flights: flightsData.flights,
+  }
+};
 
-
-export default App; 
+export default connect(mapState)(App); 
