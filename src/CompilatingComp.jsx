@@ -10,10 +10,7 @@ import { onGetDataFromServer } from './main/main.actions';
 
 const CompilatingComp = (props) => {
   useEffect(() => {
-    const onGetData = () => {
-      console.log('sadasdasdasdasd');
-    };
-    document.addEventListener('DOMContentLoaded', onGetData);
+      onGetDataFromServer();
   });
   return (
         <div className="wrapper">
