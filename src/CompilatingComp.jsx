@@ -11,8 +11,9 @@ import { onGetDataFromServer } from './main/main.actions';
 const CompilatingComp = (props) => {
   useEffect(() => {
     onGetDataFromServer();
+    console.log(props);
   });
-  console.log(props);
+ 
   return (
         <div className="wrapper">
         <Header />
