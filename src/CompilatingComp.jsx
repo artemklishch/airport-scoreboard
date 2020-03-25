@@ -11,11 +11,10 @@ import { onGetDataFromServer } from './main/main.actions';
 const CompilatingComp = (props) => {
   useEffect(() => {
     const onGetData = () => {
-      onGetDataFromServer();
+      console.log('sadasdasdasdasd');
     };
-    document.addEventListener('load', onGetData);
+    document.addEventListener('DOMContentLoaded', onGetData);
   });
-  console.log(props);
   return (
         <div className="wrapper">
         <Header />
