@@ -7,6 +7,7 @@ const MainTopBlock = (props) => {
 
   const onFormSubmit = event => {
     event.preventDefault();
+    onChangeFlightNum('');
     if(flightNum !== ''){
       return props.history.push(`/schedule/departure/${flightNum}`);
     }else return; 

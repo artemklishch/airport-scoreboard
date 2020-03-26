@@ -6,12 +6,10 @@ import ScheduleList from './main/main_lists_schedule/ScheduleList';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { onGetDataFromServer } from './main/main.actions';
-import { flightsSelectorOnDepature, flightsSelectorOnArrival } from './main/main.selectors';
 
 
 const CompilatingComp = (props) => {
   document.addEventListener('DOMContentLoaded', props.onGetDataFromServer);
-  // if(!props.flightsDepature) return null;
   return (
         <div className="wrapper">
         <Header />
@@ -30,13 +28,6 @@ const CompilatingComp = (props) => {
         </div>
   );
 };
-
-// const mapState = (state) => {
-//   return {
-//     flightsDepature: flightsSelectorOnDepature(state),
-//     flightsArrival: flightsSelectorOnArrival(state),
-//   }
-// };
 
 const mapDispatch = { onGetDataFromServer };
 
