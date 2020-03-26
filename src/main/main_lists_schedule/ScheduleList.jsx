@@ -27,7 +27,6 @@ const ScheduleList = (props) => {
     : flightTypeOrNum === 'arrival'
     ? props.flightsArrival
     : props.flightsDepature.filter(flight => flight.flightNum === match.params.certainFlight);
-    
 
   const depBtnClass = classNames('scheduleList__links_departures', {
     'btn_on_focus': flightTypeOrNum === 'departure' || flightTypeOrNum === match.params.certainFlight
