@@ -1,43 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { flightsSelector } from '../main.selectors';
-import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
-import { Link, useRouteMatch } from 'react-router-dom';
+import React, {useState} from 'react';
+import { Link, useRouteMatch, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
+import { flightsSelectorOnDepature, flightsSelectorOnArrival } from '../main.selectors';
+import { connect } from 'react-redux';
 
 
 const ScheduleList = (props) => {
-  const { flights } = props;
   const [flightNum, onChangeFlightNum] = useState('');
   const onChangeFlightInput = event => onChangeFlightNum(event.target.value);
 
   const onFormSubmit = event => {
     event.preventDefault();
-    props.onGetDataForCertainDepatures(flightNum);
     onChangeFlightNum('');
-  }
+    if(flightNum !== ''){
+      return props.history.push(`/schedule/departure/${flightNum}`);
+    }else return; 
+  };
 
   const match = useRouteMatch();
-  const flightData = match.path === '/schedule/:flightType'
+  const flightTypeOrNum = match.path === '/schedule/:flightType'
     ? match.params.flightType
     : match.params.certainFlight;
-
-  useEffect(() => {
-    flightData === 'departure'
-      ? props.onGetDataForDepatures()
-      : flightData === match.params.certainFlight
-        ? props.onGetDataForCertainDepatures(match.params.certainFlight)
-        : props.onGetDataForArrivals();
-  }, [flightData]);
+  const flightsDataForRender = flightTypeOrNum === 'departure'
+    ? props.flightsDepature
+    : flightTypeOrNum === 'arrival'
+    ? props.flightsArrival
+    : props.flightsDepature.filter(flight => flight.flightNum === match.params.certainFlight);
 
   const depBtnClass = classNames('scheduleList__links_departures', {
-    'btn_on_focus': flightData === 'departure' || flightData === match.params.certainFlight
+    'btn_on_focus': flightTypeOrNum === 'departure' || flightTypeOrNum === match.params.certainFlight
   });
   const arrBtnClass = classNames('scheduleList__links_arrivals', {
-    'btn_on_focus': flightData === 'arrival'
+    'btn_on_focus': flightTypeOrNum === 'arrival'
   });
-
 
   return (
     <section className="scheduleList">
@@ -50,34 +46,26 @@ const ScheduleList = (props) => {
 
       <div className="scheduleList__data">
         <div className="scheduleList__links">
-          <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className={depBtnClass}>
+          <Link to='/schedule/departure' className={depBtnClass}>
             <i className="fas fa-plane-departure"></i>
             Departures
         </Link>
-          <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className={arrBtnClass}>
+          <Link to='/schedule/arrival' className={arrBtnClass}>
             <i className="fas fa-plane-arrival"></i>
             Arrivals
         </Link>
         </div>
-        {
-          flights && <FlightsTableData flightsList={flights} />
-        }
+        <FlightsTableData flightsList={flightsDataForRender} />
       </div>
 
     </section>
   );
 };
 
-const mapState = state => {
+const mapState = (state) => {
   return {
-    flights: flightsSelector(state),
+    flightsDepature: flightsSelectorOnDepature(state),
+    flightsArrival: flightsSelectorOnArrival(state),
   }
 };
-
-const mapDispatch = {
-  onGetDataForDepatures,
-  onGetDataForArrivals,
-  onGetDataForCertainDepatures,
-};
-
-export default connect(mapState, mapDispatch)(ScheduleList);
+export default withRouter(connect(mapState)(ScheduleList));

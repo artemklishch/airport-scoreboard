@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { onGetDataForDepatures, onGetDataForArrivals, onGetDataForCertainDepatures } from '../main.actions';
 
 const MainTopBlock = (props) => {
   const [flightNum, onChangeFlightNum] = useState('');
@@ -9,6 +7,7 @@ const MainTopBlock = (props) => {
 
   const onFormSubmit = event => {
     event.preventDefault();
+    onChangeFlightNum('');
     if(flightNum !== ''){
       return props.history.push(`/schedule/departure/${flightNum}`);
     }else return; 
@@ -23,11 +22,11 @@ const MainTopBlock = (props) => {
         <button className="main__top_form-submit" type='submit'>Search</button>
       </form>
       <div className="main__top__btns">
-        <Link onClick={props.onGetDataForDepatures} to='/schedule/departure' className="main__top__btns_depatures">
+        <Link to='/schedule/departure' className="main__top__btns_depatures">
           <i className="fas fa-plane-departure"></i>
           All depatures
           </Link>
-        <Link onClick={props.onGetDataForArrivals} to='/schedule/arrival' className="main__top__btns_arrivals">
+        <Link to='/schedule/arrival' className="main__top__btns_arrivals">
           <i className="fas fa-plane-arrival"></i>
           All arrivals
           </Link>
@@ -35,11 +34,4 @@ const MainTopBlock = (props) => {
     </section>
   );
 };
-
-const mapDispatch = {
-  onGetDataForDepatures, 
-  onGetDataForArrivals,
-  onGetDataForCertainDepatures,
-};
-
-export default withRouter(connect(null, mapDispatch)(MainTopBlock));
+export default withRouter(MainTopBlock);
