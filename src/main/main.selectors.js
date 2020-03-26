@@ -7,16 +7,69 @@ export const secondFourBlocks = state =>
   state.contentForFourBlocks.secondFourBlocks;
 
 
-const onGetFlights = state => state.flightsData.flights;
-export const flightsSelector = createSelector(
+export const onGetFlights = state => {
+  if(!state.flightsData.flights) return;
+  return state.flightsData.flights.body;
+} 
+// export const flightsSelector = createSelector(
+//   [onGetFlights],
+//   (flights) => {
+//     if(!flights) return null;
+//     return flights.map(flight => {
+//       const { term, ID } = flight;
+//       const expectedTime  = flight.timeDepShedule || flight.timeArrShedule;
+//       const realTime = flight.timeDepFact || flight.timeLandFact;
+//       const airport = flight["airportToID.city_en"] || flight["airportFromID.city_en"];
+//       const flightNum = flight["planeTypeID.code"];
+//       const airline = flight.airline.en.name;
+//       return {
+//         ID,
+//         term,
+//         realTime,
+//         airport,
+//         expectedTime,
+//         airline,
+//         flightNum,
+//       };
+//     })
+//   }
+    
+// );
+
+export const flightsSelectorOnDepature = createSelector(
   [onGetFlights],
   (flights) => {
     if(!flights) return null;
-    return flights.map(flight => {
+    return flights.departure.map(flight => {
+      const { term, ID } = flight;
+      const expectedTime  = flight.timeDepShedule;
+      const realTime = flight.timeDepFact;
+      const airport = flight["airportToID.city_en"];
+      const flightNum = flight["planeTypeID.code"];
+      const airline = flight.airline.en.name;
+      return {
+        ID,
+        term,
+        realTime,
+        airport,
+        expectedTime,
+        airline,
+        flightNum,
+      };
+    })
+  }  
+);
+
+
+export const flightsSelectorOnArrival = createSelector(
+  [onGetFlights],
+  (flights) => {
+    if(!flights) return null;
+    return flights.arrival.map(flight => {
       const { term, ID } = flight;
       const expectedTime  = flight.timeDepShedule || flight.timeArrShedule;
-      const realTime = flight.timeDepFact || flight.timeLandFact;
-      const airport = flight["airportToID.city_en"] || flight["airportFromID.city_en"];
+      const realTime = flight.timeLandFact;
+      const airport = flight["airportFromID.city_en"];
       const flightNum = flight["planeTypeID.code"];
       const airline = flight.airline.en.name;
       return {
@@ -30,5 +83,4 @@ export const flightsSelector = createSelector(
       };
     })
   }
-    
 );

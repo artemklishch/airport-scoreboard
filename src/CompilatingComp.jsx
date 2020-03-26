@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from './header/Header';
 import Main from './main/Main';
 import Footer from './footer/Footer';
@@ -6,14 +6,12 @@ import ScheduleList from './main/main_lists_schedule/ScheduleList';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { onGetDataFromServer } from './main/main.actions';
+import { flightsSelectorOnDepature, flightsSelectorOnArrival } from './main/main.selectors';
 
 
 const CompilatingComp = (props) => {
-  useEffect(() => {
-      document.addEventListener('DOMContentLoaded', props.onGetDataFromServer);
-      //  props.onGetDataFromServer();
-      console.log(props);
-  });
+  document.addEventListener('DOMContentLoaded', props.onGetDataFromServer);
+  // if(!props.flightsDepature) return null;
   return (
         <div className="wrapper">
         <Header />
@@ -33,12 +31,13 @@ const CompilatingComp = (props) => {
   );
 };
 
-const mapState = (state) => {
-  return {
-    flights: state.flightsData.flights,
-  }
-};
+// const mapState = (state) => {
+//   return {
+//     flightsDepature: flightsSelectorOnDepature(state),
+//     flightsArrival: flightsSelectorOnArrival(state),
+//   }
+// };
 
 const mapDispatch = { onGetDataFromServer };
 
-export default connect(mapState, mapDispatch)(CompilatingComp); 
+export default connect(null, mapDispatch)(CompilatingComp); 
