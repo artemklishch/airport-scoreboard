@@ -2,6 +2,7 @@ import React from 'react';
 import Flight from './Flight';
 
 const FlightsTableData = ({ flightsList }) => {
+  if(flightsList === null) return null;
   return (
     <table className="scheduleList__table">
       <caption className="scheduleList__table_caption">Today</caption>

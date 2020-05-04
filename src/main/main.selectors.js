@@ -22,7 +22,7 @@ export const flightsSelectorOnDepature = createSelector(
       const realTime = flight.timeDepFact;
       const airport = flight["airportToID.city_en"];
       const flightNum = flight["planeTypeID.code"];
-      const airline = flight.airline.en.name;
+      const airline = flight['airline.en.name'];
       return {
         ID,
         term,
@@ -47,7 +47,7 @@ export const flightsSelectorOnArrival = createSelector(
       const realTime = flight.timeLandFact;
       const airport = flight["airportFromID.city_en"];
       const flightNum = flight["planeTypeID.code"];
-      const airline = flight.airline.en.name;
+      const airline = flight['airline.en.name'];
       return {
         ID,
         term,
