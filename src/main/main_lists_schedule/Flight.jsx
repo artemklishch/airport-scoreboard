@@ -17,7 +17,7 @@ const Flight = ({term, expectedTime, airport, realTime, airline, flightNum}) => 
       </td>
       <td className="scheduleList__table__tbody_onsmall-width">
         <p>{airport}</p>
-        <p>{`Departed at ${expectedTime}`}</p>
+        <p>{`Departed at ${expectedTime}`}</p> 
         <p>{airline}</p>
       </td>
     </tr>
