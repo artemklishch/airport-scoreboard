@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Link, useRouteMatch, withRouter } from 'react-router-dom';
+import { Link, useRouteMatch, withRouter, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import FlightsTableData from './FlightsTableData';
 import { flightsSelectorOnDepature, flightsSelectorOnArrival } from '../main.selectors';
@@ -55,7 +55,7 @@ const ScheduleList = (props) => {
             Arrivals
         </Link>
         </div>
-        <FlightsTableData flightsList={flightsDataForRender} />
+        <FlightsTableData flightsList={flightsDataForRender} flightType={flightTypeOrNum} />
       </div>
 
     </section>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Flight from './Flight';
 
-const FlightsTableData = ({ flightsList }) => {
+const FlightsTableData = ({ flightsList, flightType }) => {
   if(flightsList === null) return null;
   return (
     <table className="scheduleList__table">
@@ -14,7 +14,7 @@ const FlightsTableData = ({ flightsList }) => {
       <tbody className="scheduleList__table__tbody">
         {
           flightsList.length !== 0
-            ? flightsList.map(flight => <Flight key={flight.ID} {...flight} />)
+            ? flightsList.map(flight => <Flight key={flight.ID} {...flight} flightType={flightType} />)
             : <tr className="scheduleList__table__tbody_row">
               <td>No flights</td>
             </tr>
