@@ -10,7 +10,7 @@ const Flight = ({
   flightNum,
   flightType,
 }) => {
-  const typeOfliht = flightType === "arrival" ? "Arrived" : "Depatured";
+  const typeFlight = flightType === "arrival" ? "Arrived" : "Depatured";
   return (
     <tr className="scheduleList__table__tbody_row">
       <td className="scheduleList__table__tbody_terminal">{term}</td>
@@ -18,7 +18,7 @@ const Flight = ({
         {moment(expectedTime).format("h:mm")}
       </td>
       <td className="scheduleList__table__tbody_destintion">{airport}</td>
-      <td className="scheduleList__table__tbody_fact-time">{`${typeOfliht} at ${moment(
+      <td className="scheduleList__table__tbody_fact-time">{`${typeFlight} at ${moment(
         realTime
       ).format("h:mm")}`}</td>
       <td className="scheduleList__table__tbody_airline">{airline}</td>
